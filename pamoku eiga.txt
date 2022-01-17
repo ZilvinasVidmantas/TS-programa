@@ -1,0 +1,4 @@
+1 TypeScript įvadas
+  1.1 Įvadas.
+  1.2 Instaliacija ir kompiliavimas.
+  1.3 Primityvūs tipai

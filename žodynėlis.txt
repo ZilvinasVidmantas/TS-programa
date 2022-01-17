@@ -1,0 +1,8 @@
+* Compile time - laikas kuomet programinis kodas paverčiamas kompiuteriui suprantamu mašininiu kodu.
+* Programa - Sukompiliuotas(paruoštasas) mašininis kodas, kurį gali įvykdyti kompiuteris.
+* Procesas - Šiuo metu vykdoma Programa.
+* Runtime - Laikas, kurio metu vyksta procesas.
+* Kompiliuoti - paversti aukštesnio lygio kodą į žemesnio lygio kodą
+* Transpiliuoti - paversti to paties lygio kodą į kito tipo to paties lygio kodą
+* Node.js - C++ programa, skirta kompiliuoti ir vykdyti JavaScript kodą
+* npm - komanda skirta tvarkyti bibliotekoms
