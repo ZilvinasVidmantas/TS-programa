@@ -1,0 +1,6 @@
+2 Duomenų tipai
+  2.1 Pamokos darbo aprašymas.txt
+  2.2 parsiuntimui/TS-2-primitive-types/src/main.js
+  2.3 parsiuntimui/TS-2-typed-functions/src/main.js
+  2.4 parsiuntimui/TS-2-typed-objects/src/main.js
+  2.5 parsiuntimui/TS-2-typed-arrays/src/main.js

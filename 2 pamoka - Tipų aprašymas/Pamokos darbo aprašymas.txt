@@ -1,0 +1,15 @@
+Šioje pamokoje išmoksite:
+  * aprašyti primityvius tipus
+  * aprašyti funkcijų parametrus ir funkcijų grąžinimo tipus
+  * aprašyti objektų tipus
+  * aprašyti masyvus
+
+Parsisiųskite pamokos failus.
+Kiekvienamas aplankas-tema turi failą './src/main.ts'.
+Jums reikia:
+  * transpiliuoti šį failą į JavaScript failą:
+    1. Pakeiskite savo darbinį terminalo kelią į aplanko kuriame yra tsconfig.json failas
+    2. įvykdykite komandą terminale: 
+      $tsc
+  * Sukurti index.html failą
+  * įtraukti transpiliuotą JavaScript

@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es2016",                          
+    "experimentalDecorators": true,              
+    "emitDecoratorMetadata": true,               
+    "module": "commonjs",                        
+    "rootDir": "../TS-2-typed-functions/src",                                 
+    "outDir": "../TS-2-typed-functions/public/js",                        
+    "removeComments": true,                      
+    "esModuleInterop": true,                     
+    "forceConsistentCasingInFileNames": true,    
+    "strict": true,                              
+    "noImplicitAny": true,                       
+    "strictNullChecks": true,                    
+    "strictFunctionTypes": true,                 
+    "strictBindCallApply": true,                 
+    "noImplicitThis": true,                      
+    "alwaysStrict": true,                        
+    "noUnusedLocals": true,                      
+    "noUnusedParameters": true,                  
+    "exactOptionalPropertyTypes": true,          
+    "noImplicitReturns": true,                   
+    "noFallthroughCasesInSwitch": true,          
+    "noImplicitOverride": true,                  
+    "skipLibCheck": true                         
+  },
+}
