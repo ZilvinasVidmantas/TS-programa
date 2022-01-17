@@ -10,7 +10,7 @@ Aplanke './TS-1-tasks/':
   7. './public/index.html' faile pakeiskite kelią iki sukompiliuoto JavaScript failo
 
 Aplanke './TS-1-event-listener/':
-8. Transpiliuokite TypeScript failą ir įtraukite JavaScript failą į HTML failą
-9. Peržiūrėkite kodą, main.ts.
-10. Pabandykite surasti sau iškilusių klausimų atsakymus: https://google.lt
-11. Neradus atsakymų į iškilusius klausimus, suformuokite juos raštu ir klauskite dėstytojo.
+  8. Transpiliuokite TypeScript failą ir įtraukite JavaScript failą į HTML failą
+  9. Peržiūrėkite kodą, main.ts. įspaudę CTRL paspauskitę ant tipų. Panagrinėkite DOM tipus.
+  10. Pabandykite surasti sau iškilusių klausimų atsakymus: https://google.lt
+  11. Neradus atsakymų į iškilusius klausimus, suformuokite juos raštu ir klauskite dėstytojo.
