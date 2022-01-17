@@ -11,5 +11,6 @@ Jums reikia:
     1. Pakeiskite savo darbinį terminalo kelią į aplanko kuriame yra tsconfig.json failas
     2. įvykdykite komandą terminale: 
       $tsc
-  * Sukurti index.html failą
-  * įtraukti transpiliuotą JavaScript
+  * Sukurti index.html failą aplanke './public'
+  * įtraukti transpiliuotą JavaScript failą
+  * konsolėje peržiūrėkite atsakymus

@@ -17,7 +17,7 @@ const age: number = 19;
 const wife: null = null;
 const innerAnimal: undefined = undefined;
 
-console.group('1. Priskirkite kintamiesiems tipus');
+console.group('1. Priskirkite kintamiesiems duomenų tipus');
 {
   const title = 'Vermontas';
   const subTitle = 'Kavinė - Baras';
@@ -26,6 +26,7 @@ console.group('1. Priskirkite kintamiesiems tipus');
   const isOpen = true;
   const openTime = '12:00';
   const closeTime = '02:00';
+  const security = null;
 
   console.log({
     title: [title, typeof title],
@@ -35,6 +36,7 @@ console.group('1. Priskirkite kintamiesiems tipus');
     isOpen: [isOpen, typeof isOpen],
     openTime: [openTime, typeof openTime],
     closeTime: [closeTime, typeof closeTime],
+    security: [security, typeof security],
   });
 }
 console.groupEnd();

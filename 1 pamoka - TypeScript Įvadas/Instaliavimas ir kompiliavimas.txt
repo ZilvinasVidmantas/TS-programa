@@ -29,32 +29,32 @@ Aplanke, kuriame paleidote komandą turėjo susikurti failas 'ts-config.json'. �
 Šiam paskaitų ciklui naudosime tokią konfigūraciją:
 {
   "compilerOptions": {
-    "target": "es2016",                           
-    "rootDir": "./src",                            
-    "outDir": "./public",                             
-    "module": "commonjs",                         
-    "declaration": true,                          
-    "declarationMap": true,                       
-    "experimentalDecorators": true,               
-    "emitDecoratorMetadata": true,                
-    "sourceMap": true,                            
-    "esModuleInterop": true,                      
-    "forceConsistentCasingInFileNames": true,     
-    "strict": true,                               
-    "noImplicitAny": true,                        
-    "strictNullChecks": true,                     
-    "strictFunctionTypes": true,                  
-    "strictBindCallApply": true,                  
-    "noImplicitThis": true,                       
-    "alwaysStrict": true,                         
-    "noUnusedLocals": true,                       
-    "noUnusedParameters": true,                   
-    "exactOptionalPropertyTypes": true,           
-    "noImplicitReturns": true,                    
-    "noFallthroughCasesInSwitch": true,           
-    "noImplicitOverride": true,                   
-    "removeComments": true,                       
-    "skipLibCheck": true                          
+    "target": "es2016",                       // į kokią JavaScript versiją paversti kodą                 
+    "rootDir": "./src",                       // aplankas, kuriame ieškoti TypeScript failų                           
+    "outDir": "./public",                     // aplankas į kurį sudėti transpiliuotus JavaScript failus                             
+    "module": "commonjs",                     // Transpiliuojamų failų tipas                        
+    "declaration": true,                      // ar sukurti deklaruotų kintamųjų tipų failą                        
+    "declarationMap": true,                   // ar susieti potencialių klaidų nuorodas su kintamųjų tipų failu                       
+    "experimentalDecorators": true,           // ar leisti naudoti dekoratorius               
+    "emitDecoratorMetadata": true,            // ar sukurti dekoratorių aprašymų failą               
+    "sourceMap": true,                        // ar susieti transpiliuoto JavaScript failų eilutes su orginalių failų eilutėmis                           
+    "esModuleInterop": true,                  // ar leisti importuoti failus su nauja 'import-export' sintakse                    
+    "forceConsistentCasingInFileNames": true, // ar versti vadinti failus pagal vienodą failų įvardinimo sintaksę
+    "strict": true,                           // ar kodas privalo būti griežtas                             
+    "noImplicitAny": true,                    // ar galima palikti kintamuosius be tipų                       
+    "strictNullChecks": true,                 // griežtas null tipo kintamųjų tikrinimas                    
+    "strictFunctionTypes": true,              // griežtas funkcijų aprašymas                 
+    "strictBindCallApply": true,              // this reikšmės aprašymas, atliekant Function.bind, Function.call ir Function.aply metodus                 
+    "noImplicitThis": true,                   // this nuorodos aprašymo reikalavimas                      
+    "alwaysStrict": true,                     // griežtos sintaksės reikalavimas                        
+    "noUnusedLocals": true,                   // nepanaudotų kintamųjų reikalavimas
+    "noUnusedParameters": true,               // nepanaudotų funkcijos parametrų reikalavimas                
+    "exactOptionalPropertyTypes": true,       // tiksliai aprašytų savybių aprašymas           
+    "noImplicitReturns": true,                // reikalavimas apibūtinti funkcijų grąžinimo tipus                   
+    "noFallthroughCasesInSwitch": true,       // switch direktyvos sugriežtinimas
+    "noImplicitOverride": true,               // reikalavimas įvardinti jeigu perrašome funkcijas
+    "removeComments": true,                   // ar pašalinti komentarus                      
+    "skipLibCheck": true                      // ar praleisti tipų tikrinimą naudojant bibliotekas
   },
 }
 Naudojant tokias taisykles visą savo programinį TypeScript kodą galime rašyti aplanke 'src/' ir sukompiliavus JavaScript kodas atsiras aplanke 'public/'
