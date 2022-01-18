@@ -2,7 +2,7 @@
   * aprašyti primityvius tipus
   * aprašyti funkcijų parametrus ir funkcijų grąžinimo tipus
   * aprašyti objektų tipus
-  * aprašyti masyvus
+  * aprašyti masyvų tipus
 
 Parsisiųskite pamokos failus.
 Kiekvienamas aplankas-tema turi failą './src/main.ts'.
@@ -18,3 +18,6 @@ Jums reikia:
     './transpiliuoto-failo-įtraukimas.png'
   * konsolėje peržiūrėkite atsakymus
     './įvykdyto kodo rezultatas.png'
+  * atlikite užduotis
+
+Viršuje aprašytus veiksmus reikia atlikti kiekviename aplenke-temoje.
