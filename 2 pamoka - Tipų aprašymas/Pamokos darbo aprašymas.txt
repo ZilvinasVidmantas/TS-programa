@@ -12,7 +12,7 @@ Jums reikia:
       './terminalo-atidarymas-aplanke.png'
     2. įvykdykite komandą terminale: 
       $tsc
-        './TypeScript-transpiliavimas.png'
+        './typescript-transpiliavimas.png'
   * Sukurti index.html failą aplanke './public'
   * įtraukti transpiliuotą JavaScript failą
     './transpiliuoto-failo-įtraukimas.png'
