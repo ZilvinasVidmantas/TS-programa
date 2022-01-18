@@ -20,4 +20,4 @@ Jums reikia:
     './įvykdyto kodo rezultatas.png'
   * atlikite užduotis
 
-Viršuje aprašytus veiksmus reikia atlikti kiekviename aplenke-temoje.
+Viršuje aprašytus veiksmus reikia atlikti kiekviename aplanke-temoje.
