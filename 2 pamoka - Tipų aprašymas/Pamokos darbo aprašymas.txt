@@ -9,8 +9,12 @@ Kiekvienamas aplankas-tema turi failą './src/main.ts'.
 Jums reikia:
   * transpiliuoti šį failą į JavaScript failą:
     1. Pakeiskite savo darbinį terminalo kelią į aplanko kuriame yra tsconfig.json failas
+      './terminalo-atidarymas-aplanke.png'
     2. įvykdykite komandą terminale: 
       $tsc
+        './TypeScript-transpiliavimas.png'
   * Sukurti index.html failą aplanke './public'
   * įtraukti transpiliuotą JavaScript failą
+    './transpiliuoto-failo-įtraukimas.png'
   * konsolėje peržiūrėkite atsakymus
+    './įvykdyto kodo rezultatas.png'
