@@ -37,7 +37,7 @@ console.log({
 });
 
 /*
-  Kuomet funkcijos nieko negrąžina, galime nurodyti tipą
+  Kuomet funkcijos nieko negrąžina, turime nurodyti tipą
     * void - funkcijos grąžinimo tipas nebus reikalaujamas
 */
 
