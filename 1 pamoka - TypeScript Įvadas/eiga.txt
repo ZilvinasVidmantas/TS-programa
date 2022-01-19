@@ -1,4 +1,3 @@
 1 TypeScript įvadas
   1.1 Įvadas.txt
   1.2 Instaliacija ir kompiliavimas.txt
-  1.3 parsiuntimui/tasks.txt

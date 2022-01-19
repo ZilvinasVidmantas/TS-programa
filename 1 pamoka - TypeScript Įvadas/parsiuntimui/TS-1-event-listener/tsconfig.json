@@ -1,32 +1,3 @@
-Internetinėje naršyklėje yra vykdoma tik JavaScript kalba. Tam, kad galėtume naudoti TypeScript, turime ją pirmiau transpiliuoti(paversti) į JavaScript kalbą. 
-
-Pirmiausiai reikia parsisųsti ir susiinstaliuoti Node.js.
-Node.js - tai C++ programa, kuri leidžia kompiliuoti ir vykdyti JavaScript kodą asinchroniniu būdu.
-* Parsiuntimas - https://nodejs.org/en/
-
-Įsirašius Node.js, automatiškai yra įrašoma papildoma komandinės eilutės komanda:
-* npm(node package manager) - tai komanda, skirta tvarkyti bibliotekomsglobalioje repozitorijoje: https://www.npmjs.com/ .
-
-Susiinstaliavus Node.js reikia instaliuoti TypeScript transpiliatorių, kuris bus naudojamas paversti TypeScript kodą į JavaScript kodą. Komandinėje eilutėje rašome:
-$npm install --global typescript
-Panagrinėkime, ką reiškia kiekvienas argumentas:
-  * npm - kartu su Node.js įrašyta komandinės eilutės komanda, skirta pariųsti bibliotekas
-  * install - papildomas argumentas 'npm' komandai, nurodantis jog reikia parsiųsti biblioteką
-  * --global - papildomas nustatymas įrašymui, kuris nurodo jog ši biblioteka bus saugoma globaliai
-  * typescript - bibliotekos pavadinimas.
-Peržiūrėkite aplanką: 'C:\Users\JŪSŲ-VARTOTOJAS\AppData\Roaming\npm', jame turėtumėte matyti naujas komandas:
-  * tsc - komanda skirta transpiliuoti TS kodą į JS kodą
-  * tsserver - skirta stebėti TS kodą, jį transpiliuoti foniniuose procesuose ir rodyti klaidas
-
-Sekanti dalis - transpiliavimo taisyklių konfigūravimas
-* Susikurkite naują aplanką ir atsidarykite jį su savo kodo redaktoriumi(VSCode).
-* Atsidarykite integruotą komandinę eilutę ir vykdykite:
-  $tsc --init
-    * tsc - komanda skirta transpiliuoti TS kodą į JS kodą
-    * --init - nustatymas skirtas sukurti standartines transpiliaivmo taisykles
-Aplanke, kuriame paleidote komandą turėjo susikurti failas 'ts-config.json'. Šis failas yra skirtas nustatyti TypeScript transpiliatoriaus nustatymus visiems failams kurie yra aplanke (įskaitant vaikinius aplankus). Atsidarykite šį failą ir pamatysite daug išvardintų taisyklių, kurias galite atkomentuoti - padaryti aktyviomis. Visą informaciją apie taisyklių variacijas galite rasti: https://www.typescriptlang.org/tsconfig
-
-Šiam paskaitų ciklui naudosime tokią konfigūraciją:
 {
   "compilerOptions": {
     "target": "es2016",                       // į kokią JavaScript versiją paversti kodą                 
@@ -56,12 +27,3 @@ Aplanke, kuriame paleidote komandą turėjo susikurti failas 'ts-config.json'. �
     "skipLibCheck": true                      // ar praleisti tipų tikrinimą naudojant bibliotekas
   },
 }
-Naudojant tokias taisykles visą savo programinį TypeScript kodą galime rašyti aplanke 'src/' ir sukompiliavus JavaScript kodas atsiras aplanke 'public/'
-
-Tam, kad transpiliuoti TS failus į JS failus, naudokite tokią komandą:
-  $tsc
-
-Tam, kad TS failai būtų transpiliuojami į JS failus kiekvieną kart įvykus TS failų pakitimams, naudokite tokią komandą:
-  $tsc --watch
-
-
