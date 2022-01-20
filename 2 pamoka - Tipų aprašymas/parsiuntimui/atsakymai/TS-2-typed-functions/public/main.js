@@ -6,7 +6,7 @@ const joinStrings = (str1, str2) => {
     return str1 + ' ' + str2;
 };
 const createInitials = function (str1, str2) {
-    return str1[0].toLocaleUpperCase() + str2[2].toLocaleUpperCase();
+    return str1[0].toLocaleUpperCase() + str2[0].toLocaleUpperCase();
 };
 const sum = addNumbers(5, 7);
 const joinedString = joinStrings('Penediktas', 'Tušinis');

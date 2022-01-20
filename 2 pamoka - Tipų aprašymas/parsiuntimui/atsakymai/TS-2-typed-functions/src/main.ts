@@ -23,7 +23,7 @@ const joinStrings: binaryStringBuilder = (str1, str2) => {
 };
 
 const createInitials: binaryStringBuilder = function (str1, str2) {
-  return str1[0].toLocaleUpperCase() + str2[2].toLocaleUpperCase();
+  return str1[0].toLocaleUpperCase() + str2[0].toLocaleUpperCase();
 }
 
 const sum: number = addNumbers(5, 7);
@@ -49,21 +49,21 @@ printRedText('printRed funkcijos argumentas');
 
 console.group('1. Aprašykite funkcijoms tipus jas deklaruojant');
 {
-  const multiply = (a, b) => {
+  const multiply = (a: number, b: number): number => {
     return a * b;
   };
 
-  const power = function (base, power) {
+  const power = function (base: number, power: number): number {
     return base ** power;
   };
 
-  const squareRoot = (number) => number ** (1 / 2);
+  const squareRoot = (number: number): number => number ** (1 / 2);
 
-  const root = function (base, nthRoot) {
+  const root = function (base: number, nthRoot: number): number {
     return base ** (1 / nthRoot);
   }
 
-  const printBlueText = (text) => console.log(`%c${text}`, 'color: #0000ee');
+  const printBlueText = (text: string): void => console.log(`%c${text}`, 'color: #0000ee');
 
   const num1: number = 16;
   const num2: number = 4;
@@ -78,25 +78,27 @@ console.group('1. Aprašykite funkcijoms tipus jas deklaruojant');
 }
 console.groupEnd();
 
-
-
 console.group('2. Aprašykite funkcijų tipus prieš deklaruojant funkcijas');
 {
-  const multiply = (a, b) => {
+  type UnaryNumberProductNumberFunction = (number: number) => number;
+  type UnaryStringProductVoidFunction = (str: string) => void;
+  type BinaryNumberProductNumberFunction = (num1: number, num2: number) => number;
+
+  const multiply: BinaryNumberProductNumberFunction = (a, b) => {
     return a * b;
   };
 
-  const power = function (base, power) {
+  const power: BinaryNumberProductNumberFunction = function (base, power) {
     return base ** power;
   };
 
-  const squareRoot = (number) => number ** (1 / 2);
+  const squareRoot: UnaryNumberProductNumberFunction = (number) => number ** (1 / 2);
 
-  const root = function (base, nthRoot) {
+  const root: BinaryNumberProductNumberFunction = function (base, nthRoot) {
     return base ** (1 / nthRoot);
   }
 
-  const printBlueText = (text) => console.log(`%c${text}`, 'color: #0000ee');
+  const printBlueText: UnaryStringProductVoidFunction = (text) => console.log(`%c${text}`, 'color: #0000ee');
 
   const num1: number = 16;
   const num2: number = 4;

@@ -23,7 +23,7 @@ const joinStrings: binaryStringBuilder = (str1, str2) => {
 };
 
 const createInitials: binaryStringBuilder = function (str1, str2) {
-  return str1[0].toLocaleUpperCase() + str2[2].toLocaleUpperCase();
+  return str1[0].toLocaleUpperCase() + str2[0].toLocaleUpperCase();
 }
 
 const sum: number = addNumbers(5, 7);
