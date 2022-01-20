@@ -19,14 +19,14 @@ const innerAnimal: undefined = undefined;
 
 console.group('1. Priskirkite kintamiesiems duomenų tipus');
 {
-  const title = 'Vermontas';
-  const subTitle = 'Kavinė - Baras';
-  const peopleCount = 5;
-  const maxPeopleCount = 26;
-  const isOpen = true;
-  const openTime = '12:00';
-  const closeTime = '02:00';
-  const security = null;
+  const title: string = 'Vermontas';
+  const subTitle: string = 'Kavinė - Baras';
+  const peopleCount: number = 5;
+  const maxPeopleCount: number = 26;
+  const isOpen: boolean = true;
+  const openTime: string = '12:00';
+  const closeTime: string = '02:00';
+  const security: null = null;
 
   console.log({
     title: [title, typeof title],
