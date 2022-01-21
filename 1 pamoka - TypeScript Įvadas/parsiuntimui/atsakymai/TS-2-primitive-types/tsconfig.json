@@ -4,11 +4,11 @@
     "rootDir": "./src",                       // aplankas, kuriame ieškoti TypeScript failų                           
     "outDir": "./public",                     // aplankas į kurį sudėti transpiliuotus JavaScript failus                             
     "module": "commonjs",                     // Transpiliuojamų failų modulio tipas                        
-    "declaration": true,                      // ar sukurti deklaruotų kintamųjų tipų failą                        
-    "declarationMap": true,                   // ar susieti deklaruotų kintamųjų nuorodas su kintamaisiais                
+    // "declaration": true,                      // ar sukurti deklaruotų kintamųjų tipų failą                        
+    // "declarationMap": true,                   // ar susieti deklaruotų kintamųjų nuorodas su kintamaisiais                
+    // "sourceMap": true,                        // ar susieti transpiliuoto JavaScript failų eilutes su orginalių failų eilutėmis                           
     "experimentalDecorators": true,           // ar leisti naudoti dekoratorius               
     "emitDecoratorMetadata": true,            // ar sukurti dekoratorių aprašymų failą               
-    "sourceMap": true,                        // ar susieti transpiliuoto JavaScript failų eilutes su orginalių failų eilutėmis                           
     "forceConsistentCasingInFileNames": true, // ar versti vadinti failus pagal vienodą failų įvardinimo sintaksę
     "strict": true,                           // ar kodas privalo būti griežtos sintaksės                            
     "noImplicitAny": true,                    // ar drausti palikti kintamuosius be tipų                       

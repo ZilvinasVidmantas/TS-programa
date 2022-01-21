@@ -1,5 +1,4 @@
 Failus skaitykite ir atlikite tokia tvarka:
-  * TS-2-primitive-types
   * TS-2-typed-functions
   * TS-2-typed-objects
   * TS-2-typed-arrays
