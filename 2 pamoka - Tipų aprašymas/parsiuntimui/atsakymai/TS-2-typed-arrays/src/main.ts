@@ -142,7 +142,7 @@ console.group('Užduotys');
 
     const multiplyNumbers: MultiplyNumbers = (numbers) => numbers.reduce<number>(numbersProductReducer, 1);
 
-    // Spausdinimas
+    // Spausdinimas - ŠI SPAUSDINIMO DALIS TIK DĖL ĮDOMUMO, TIEMS KAM BUVO PER LENGVA(kolkas...)
     type AnswerObject = {
       [key: string]: number,
     };
