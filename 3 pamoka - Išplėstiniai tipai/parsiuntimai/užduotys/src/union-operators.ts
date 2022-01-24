@@ -1,5 +1,5 @@
 /*
-  Apjungimo operatorius yra skirtas aprašytis tipus, kurie apjungia kelis kitus tipus
+  Union operator (Apjungimo operatorius) yra skirtas aprašytis tipus, kurie apjungia kelis kitus tipus
 */
 
 // Union operatorius deklaruojant kintamajį
