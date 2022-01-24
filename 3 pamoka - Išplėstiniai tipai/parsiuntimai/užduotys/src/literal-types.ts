@@ -56,13 +56,13 @@ console.group('Literal types - užduotys');
   }
   console.groupEnd();
 
-  console.group('1. Sukurkite konkrečias 5 šunų veisles. Sukurkite tipą, kurio reikšmė būtų viena iš veislių.');
+  console.group('2. Sukurkite konkrečias 5 šunų veisles. Sukurkite tipą, kurio reikšmė būtų viena iš veislių.');
   {
     // sprendimą|sprendimo pavyzdžius spausdinkite čia 
   }
   console.groupEnd();
 
-  console.group('1. Sukurkite konkrečias 5 mašinos dalių tipus. Sukurkite tipą, kurio reikšmė būtų viena iš dalių.');
+  console.group('3. Sukurkite konkrečias 5 mašinos dalių tipus. Sukurkite tipą, kurio reikšmė būtų viena iš dalių.');
   {
     // sprendimą|sprendimo pavyzdžius spausdinkite čia 
   }
