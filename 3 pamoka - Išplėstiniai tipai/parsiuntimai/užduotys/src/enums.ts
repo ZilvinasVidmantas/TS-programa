@@ -1,5 +1,7 @@
 /*
   Enum(išvardinimas) - tai konstantų rinkinys.
+  Enum(išvardinimai) yra naudojami įvardinti tipams ar nustatymams. 
+  Jų reikšmės dažniau naudojamos tipo patikrinimams, nei atvazdavimui.
 */
 
 // Skaitiniai išvardinimai (numeric enums)
