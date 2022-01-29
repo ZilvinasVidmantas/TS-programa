@@ -1,5 +1,5 @@
 const numbers: number[] = [1, 2, 3, 4, 5, 6, 7];
-const words: string[] = ["pirmadienis", "antradienis", "trečiadienis", "ketvirtadienis"];
+const words: string[] = ["pirmadienis", "antradienis", "trečiadienis", "ketvirtadienis", "penktadienis", "šeštadienis", "sekmadienis"];
 
 console.groupCollapsed('1. Parašykite funkciją, kuri grąžina pirmą masyvo elementą.');
 {
@@ -197,6 +197,7 @@ console.groupCollapsed('13. Parašykite funkciją, kuri atspausdina kiekvieno ma
   function solution(arr: any[]): void {
     const res = arr.map((x, i) => `[${i}]=>${x} `).join(', ');
     console.log(res);
+    // console.log(...arr.map((x, i) => `[${i}]=>${x} `));
   }
 
   console.log(numbers);
