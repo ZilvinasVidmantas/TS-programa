@@ -1,5 +1,5 @@
 /*
-  literal-types(konkretūs tipai) - tai tai sudaryti iš konkrečių reikšmių
+  literal-types(konkretūs tipai) - tai tipai sudaryti iš konkrečių reikšmių
 */
 
 type Latvia = 'Latvia';

@@ -1,5 +1,5 @@
 /*
-  literal-types(konkretūs tipai) - tai tai sudaryti iš konkrečių reikšmių
+  literal-types(konkretūs tipai) - tai tipai sudaryti iš konkrečių reikšmių
 */
 
 type Latvia = 'Latvia';
@@ -47,24 +47,52 @@ const req2 = {
 console.group('Literal types - užduotys');
 {
   // ↓↓↓↓ Tipus ir užduotims bendrus kintamuosius apraškite čia ↓↓↓↓
+  type Berlin = 'Berlin';
+  type Hamburg = 'Hamburg';
+  type Munich = 'Munich';
+  type Cologne = 'Cologne';
+  type Frankfurt = 'Frankfurt';
+  type GermanyCity = Berlin | Hamburg | Munich | Cologne | Frankfurt;
+
+  type Doberman = 'Doberman';
+  type ChowChow = 'ChowChow';
+  type Dalmantin = 'Dalmantin';
+  type Buldog = 'Buldog';
+  type Mops = 'Mops';
+  type Breed = Doberman | ChowChow | Dalmantin | Buldog | Mops;
+
+  type Engine = 'Engine';
+  type Trasmission = 'Trasmission';
+  type Wheel = 'Wheel';
+  type FuelTank = 'FuelTank';
+  type FuelFilter = 'FuelFilter';
+  type CarPart = Engine | Trasmission | Wheel | FuelTank | FuelFilter;
 
   // ↑↑↑↑ Tipus ir užduotims bendrus kintamuosius apraškite čia ↑↑↑↑
 
   console.group('1. Sukurkite konkrečius 5 dižiausių Vokietijos miestų tipus. Sukurkite tipą, kurio reikšmė būtų viena iš miestų.');
   {
-    // sprendimą|sprendimo pavyzdžius spausdinkite čia 
+    const city1: GermanyCity = 'Berlin';
+    const city2: GermanyCity = 'Cologne';
+
+    console.log({ city1, city2 })
   }
   console.groupEnd();
 
   console.group('2. Sukurkite konkrečias 5 šunų veisles. Sukurkite tipą, kurio reikšmė būtų viena iš veislių.');
   {
-    // sprendimą|sprendimo pavyzdžius spausdinkite čia 
+    const breed1: Breed = 'Dalmantin';
+    const breed2: Breed = 'Mops';
+
+    console.log({ breed1, breed2 });
   }
   console.groupEnd();
 
   console.group('3. Sukurkite konkrečias 5 mašinos dalių tipus. Sukurkite tipą, kurio reikšmė būtų viena iš dalių.');
   {
-    // sprendimą|sprendimo pavyzdžius spausdinkite čia 
+    const parts: CarPart[] = ['Engine', 'Wheel', 'Trasmission'];
+
+    console.log(parts);
   }
   console.groupEnd();
 
