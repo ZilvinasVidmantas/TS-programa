@@ -1,4 +1,6 @@
 Parsisiųskite pamokos failus.
+[Nuoroda į "/parsiuntimui"]
+
 Kiekvienamas aplankas-tema turi failą './src/main.ts'.
 Jums reikia:
   * transpiliuoti šį failą į JavaScript failą:

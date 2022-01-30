@@ -1,6 +1,0 @@
-Bendriniai tipai - tai duomenų tipo nustatymas vykdymo metu.
-Bendrinai tipai naudojami, kuomet funkcijos/klasės gali atlikti veiksmus su tam tikra tipų aibe.
-Tokiu atveju, gali aprašyti funkcijas/klases visai tai tipų aibei.
-
-[pav-1.jpg]
-
