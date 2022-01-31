@@ -97,7 +97,7 @@ console.group('6. Parašykite funkciją, kuri priimtų bet kokią reikšmę ir g
 
 
   function solution<Type>(initialValue: Type): IncapsulatedValueObject<Type> {
-    let value: Type;
+    let value: Type = initialValue;
     return {
       setValue: (newValue) => value = newValue,
       getValue: () => value,
