@@ -18,7 +18,7 @@
   
   Norint geriau suprasti priežastis, kodėl verta naudoti TypeScript reikia pirmiau susipažinti su tokiais terminais:
     * Compile time - laikas kuomet programinis kodas paverčiamas kompiuteriui suprantamu mašininiu kodu.
-    * Programa - Sukompiliuotas(paruoštasas) mašininis kodas, kurį gali įvykdyti kompiuteris.
+    * Programa - Sukompiliuotas(paruoštas) mašininis kodas, kurį gali įvykdyti kompiuteris.
     * Procesas - Šiuo metu vykdoma Programa.
     * Runtime - Laikas, kurio metu vyksta procesas.
   
