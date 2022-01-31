@@ -59,6 +59,33 @@ console.group('5. Parašykite funkciją, kuri sujungia tokių pat tipų masyvus 
     console.log({ args: args3, result: solution(...args3) });
 }
 console.groupEnd();
+console.group('6. Parašykite funkciją, kuri priimtų bet kokią reikšmę ir grąžintų objektą su savybėmis-funkcijomis "setValue" - reikšmei nustatyti ir "getValue" tai reikšmei nustatyti. Funkcijai perduota reikšmė neturi būti pasiekiama tiesiogiai.');
+{
+    function solution(initialValue) {
+        let value;
+        return {
+            setValue: (newValue) => value = newValue,
+            getValue: () => value,
+        };
+    }
+    const value1 = 7;
+    const value2 = ["Sidnius", "Mauricijus", "Penktasis"];
+    const value3 = { name: 'Fanatijus', surname: 'Labdara' };
+    const obj1 = solution(value1);
+    const obj2 = solution(value2);
+    const obj3 = solution(value3);
+    console.log('initial values');
+    console.log({
+        value1: obj1.getValue(),
+        value2: obj2.getValue(),
+        value3: obj3.getValue(),
+    });
+    console.log('changing values...');
+    obj1.setValue(9);
+    obj2.setValue(['Pakeista']);
+    obj3.setValue({ name: 'Pakaitalas', surname: 'Fuflo' });
+}
+console.groupEnd();
 console.group('6. Perskaitykite straipsnį apie dvipusio susieto sąrašo struktūrą(Doubly Linked List) ir parašykite implementaciją naudojant TypeScript.');
 {
     console.group('6.1 Sukurkite funkciją iteruoti per dvipusį sąrašą.');

@@ -88,6 +88,49 @@ console.group('5. Parašykite funkciją, kuri sujungia tokių pat tipų masyvus 
 }
 console.groupEnd();
 
+console.group('6. Parašykite funkciją, kuri priimtų bet kokią reikšmę ir grąžintų objektą su savybėmis-funkcijomis "setValue" - reikšmei nustatyti ir "getValue" tai reikšmei nustatyti. Funkcijai perduota reikšmė neturi būti pasiekiama tiesiogiai.');
+{
+  type IncapsulatedValueObject<Type> = {
+    setValue: (newValue: Type) => void,
+    getValue: () => Type
+  };
+
+
+  function solution<Type>(initialValue: Type): IncapsulatedValueObject<Type> {
+    let value: Type;
+    return {
+      setValue: (newValue) => value = newValue,
+      getValue: () => value,
+    }
+  }
+
+  // Spausdinimas
+  const value1: number = 7;
+  const value2: Array<string> = ["Sidnius", "Mauricijus", "Penktasis"];
+  const value3: { name: string, surname: string } = { name: 'Fanatijus', surname: 'Labdara' };
+
+  const obj1 = solution(value1);
+  const obj2 = solution(value2);
+  const obj3 = solution(value3);
+
+  console.log('initial values');
+  console.log({
+    value1: obj1.getValue(),
+    value2: obj2.getValue(),
+    value3: obj3.getValue(),
+  })
+
+  console.log('changing values...');
+  obj1.setValue(9);
+  obj2.setValue(['Pakeista']);
+  obj3.setValue({ name: 'Pakaitalas', surname: 'Fuflo' });
+
+
+}
+console.groupEnd();
+
+
+
 console.group('6. Perskaitykite straipsnį apie dvipusio susieto sąrašo struktūrą(Doubly Linked List) ir parašykite implementaciją naudojant TypeScript.');
 // straipsnis: https://en.wikipedia.org/wiki/Doubly_linked_list
 {

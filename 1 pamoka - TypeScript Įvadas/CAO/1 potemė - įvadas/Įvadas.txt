@@ -7,7 +7,7 @@
     * Funkcijų grąžinimo tipai
     * Klasių savybių tipai.
     * Klasių metodų tipai
-    * 'this' nuorodo tipas, funkcijos vykdymo metu
+    * 'this' nuorodos tipas, funkcijos vykdymo metu
     * OOP inkapsuliacija
       * Klasių savybių ir metodų pasiekiamumo lygiai
     * OOP Abstrakcija ir OOP Polimorfizmas

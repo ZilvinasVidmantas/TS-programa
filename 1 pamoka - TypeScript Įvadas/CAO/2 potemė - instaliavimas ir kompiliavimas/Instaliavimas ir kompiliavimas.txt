@@ -8,11 +8,11 @@ Node.js - tai C++ programa, kuri leidžia kompiliuoti ir vykdyti JavaScript kod�
 * npm(node package manager) - tai komanda, skirta tvarkyti bibliotekomsglobalioje repozitorijoje: https://www.npmjs.com/ .
 
 Susiinstaliavus Node.js reikia instaliuoti TypeScript transpiliatorių, kuris bus naudojamas paversti TypeScript kodą į JavaScript kodą. Komandinėje eilutėje rašome:
-$npm install --global typescript
+$npm install -global typescript
 Panagrinėkime, ką reiškia kiekvienas argumentas:
   * npm - kartu su Node.js įrašyta komandinės eilutės komanda, skirta pariųsti bibliotekas
   * install - papildomas argumentas 'npm' komandai, nurodantis jog reikia parsiųsti biblioteką
-  * --global - papildomas nustatymas įrašymui, kuris nurodo jog ši biblioteka bus saugoma globaliai
+  * -global - papildomas nustatymas įrašymui, kuris nurodo jog ši biblioteka bus saugoma globaliai
   * typescript - bibliotekos pavadinimas.
 Peržiūrėkite aplanką: 'C:\Users\JŪSŲ-VARTOTOJAS\AppData\Roaming\npm', jame turėtumėte matyti naujas komandas:
   * tsc - komanda skirta transpiliuoti TS kodą į JS kodą
