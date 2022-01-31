@@ -13,7 +13,7 @@ type Person = {
   weight?: number, // Neprivaloma savybė
 };
 
-const numbers: number[] = [1, 2, 3, 4, 5, 6];
+const numData: number[] = [1, 2, 3, 4, 5, 6];
 const names: Array<string> = ['Jagnita', 'Kimparas', 'Pitonkas', 'Fasalija'];
 const people: Person[] = [{
   id: '39304075689',
@@ -51,9 +51,7 @@ const sumNumbers = (nums: Array<number>): number => {
   return nums.reduce(numberSumReducer, 0);
 };
 
-const createPeopleArray: CreatePeopleArrayFunction = (p1, p2) => {
-  return [p1, p2];
-};
+const createPeopleArray: CreatePeopleArrayFunction = (p1, p2) => [p1, p2];
 
 console.group('Panaudojimo pavyzdžiai:');
 {
@@ -65,9 +63,9 @@ console.group('Panaudojimo pavyzdžiai:');
 
   console.group('sumNumbers');
   {
-    const result: number = sumNumbers(numbers);
+    const result: number = sumNumbers(numData);
     console.log({
-      numbers,
+      numbers: numData,
       result,
     });
   }
@@ -76,7 +74,7 @@ console.group('Panaudojimo pavyzdžiai:');
   console.group('createPeopleArray');
   {
     const couple: Array<Person> = createPeopleArray(people[0], people[1]);
-    console.log(couple)
+    console.log(couple);
   }
   console.groupEnd();
 }
@@ -89,7 +87,7 @@ console.group('Užduotys');
     const numbers: number[] = [1, -8, -6, 7, 5, 1];
 
     function addPositiveNumbers(arr: number[]) {
-      const positiveNumberReducer = (sum: number, num: number) => num > 0 ? sum + num : sum;
+      const positiveNumberReducer = (sum: number, num: number) => (num > 0 ? sum + num : sum);
 
       return arr.reduce<number>(positiveNumberReducer, 0);
     }
@@ -104,7 +102,7 @@ console.group('Užduotys');
   console.group('2. Sukurkite ir tipais aprašykite funkciją, kuri sudarytų string\'ą iš string\'ų masyvo elementų pirmųjų raidžių');
   {
     /*
-      Pvz.: 
+      Pvz.:
        * ['Lietuviškas', 'Nepriklausomas', 'Kanalas'] -> LNK
        * ['Lietuvos', 'Respublikos', 'Televizija'] -> LRT
        * ['Loughing', 'Out', 'Loud'] -> LOL
@@ -114,7 +112,7 @@ console.group('Užduotys');
     const createAcronym = (words: string[]): string => {
       const acronym = words.reduce<string>(acronymReducer, '');
       return acronym;
-    }
+    };
 
     const dataSamples: string[][] = [
       ['Lietuviškas', 'Nepriklausomas', 'Kanalas'],
@@ -129,12 +127,12 @@ console.group('Užduotys');
   console.group('3. Sukurkite ir tipais aprašykite funkciją, kuri saudaugintų visus number masyvo skaičius');
   {
     /*
-      Pvz.: 
+      Pvz.:
        * [1, 7, 8] -> 56
        * [98, 74, 5, 0] -> 0
        * [17, 10, 5] -> 850
     */
-    // Sprendimas  
+    // Sprendimas
     type NumbersMultiplyReducer = (product: number, factor: number) => number;
     type MultiplyNumbers = (numbers: Array<number>) => number;
 
@@ -157,7 +155,7 @@ console.group('Užduotys');
       [17, 10, 5],
     ];
 
-    const answerObjectReducer: AnswerObjectReducer  = (answerObject, numbers) => {
+    const answerObjectReducer: AnswerObjectReducer = (answerObject, numbers) => {
       const functionName: string = multiplyNumbers.name;
       const functionArgsString: string = `[${numbers.join(', ')}]`;
       const key: string = `${functionName}(${functionArgsString})`;
@@ -170,7 +168,7 @@ console.group('Užduotys');
       const initialValue: AnswerObject = {};
       const result: AnswerObject = samples.reduce<AnswerObject>(answerObjectReducer, initialValue);
       return result;
-    }
+    };
 
     const answerObject: AnswerObject = formatAnswerObject(samples);
 

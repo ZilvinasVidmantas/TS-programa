@@ -7,6 +7,6 @@ if (result === null) throw new Error('Neteisingas rezultatų konteinerio selekto
 const handleFieldChange: EventListener = (event) => {
   const element: HTMLInputElement = event.target as HTMLInputElement;
   result.innerHTML = element.value;
-}
+};
 
 inputField.addEventListener('keyup', handleFieldChange);
