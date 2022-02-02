@@ -1,6 +1,6 @@
 Šioje pamokoje nagrinėsime temas:
   * Sajungos operatorius - "|" (union operator)
-  * Karkasas (interface)
+  * Rinkiniai (Tuples)
   * Tipų prielaidos (type assertions)
   * Konkretūs tipai (literal types)
   * Išvardinimai (ENUM)
