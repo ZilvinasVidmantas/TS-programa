@@ -16,3 +16,4 @@ Aplanke './TS-1-event-listener/':
   11. Neradus atsakymų į iškilusius klausimus, suformuokite juos raštu ir klauskite dėstytojo.
 
 Aplanke užduotis './TS-1-primitive-types/'
+  12. Atlikite užduotis

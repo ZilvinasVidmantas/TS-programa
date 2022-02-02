@@ -14,3 +14,6 @@ Aplanke './TS-1-event-listener/':
   9. Peržiūrėkite kodą, main.ts. įspaudę CTRL paspauskitę ant tipų. Panagrinėkite DOM tipus.
   10. Pabandykite surasti sau iškilusių klausimų atsakymus: https://google.lt
   11. Neradus atsakymų į iškilusius klausimus, suformuokite juos raštu ir klauskite dėstytojo.
+
+Aplanke užduotis './TS-1-primitive-types/'
+  12. Atlikite užduotis
