@@ -2,7 +2,7 @@
   1. Sukurkitę sąrašo mazgo struktūrą ListNode, bet kokiam duomenų tipui
 
   2. Sukurkite sąrašo klasę List.
-    * Klasė turi privačias turėti savybes 
+    * Klasė turi privačias turėti savybes
       * head -> nuoroda į sąrašo pirmajį mazgą
       * taip -> nuoroda į sąrašo paskutinijė mazgą
     * Sukurkite konstruktorių, jog jis galėtų priimti pirmu parametru perduotą ListNode elementą ir priskirti
@@ -63,6 +63,7 @@ type ForEachCallback<T> = (value: T) => void;
 class List<Type> {
   // 2.
   private head: ListNode<Type> | null;
+
   private tail: ListNode<Type> | null;
 
   // 2.
@@ -70,8 +71,7 @@ class List<Type> {
     if (initialNode !== undefined) {
       this.head = initialNode;
       this.tail = initialNode;
-    }
-    else {
+    } else {
       this.head = null;
       this.tail = null;
     }
@@ -86,7 +86,7 @@ class List<Type> {
       node.next = this.head;
       this.head = node;
     }
-  }
+  };
 
   // 4.
   public addNodeEnd = (node: ListNode<Type>): void => {
@@ -97,7 +97,7 @@ class List<Type> {
       this.tail.next = node;
       this.tail = node;
     }
-  }
+  };
 
   // 5.
   public forEach = (callback: ForEachCallback<Type>): void => {
@@ -110,7 +110,7 @@ class List<Type> {
       if (currentNode.next === null) break;
       currentNode = currentNode.next;
     }
-  }
+  };
 }
 // ↑↑↑ Klasės ↑↑↑
 
@@ -202,7 +202,7 @@ console.group('5. Sukurkite metodą List.forEach klasėje List, kuris vykdytų p
   const stringArr: string[] = [];
   const putInStringArr = (x: number): void => {
     stringArr.push(String(x));
-  }
+  };
 
   console.log('number sąrašo spausdinimas');
   numberList.forEach(putInStringArr);
@@ -210,5 +210,3 @@ console.group('5. Sukurkite metodą List.forEach klasėje List, kuris vykdytų p
   console.log(numberListStringRepresentation);
 }
 console.groupEnd();
-
-
