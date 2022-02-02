@@ -4,7 +4,7 @@ HEAD, tai nuoroda į pradinį mazgą.
 
 [linked-list.png]
 
-Keičiant šios sąrašo mazgus, reikia pasirūpinti, ne tik duomenų ištinimu, bet ir gretimų mazgų nuorodų pakitimu.
+Keičiant šios sąrašo mazgus, reikia pasirūpinti, ne tik duomenų ištinimu, bet ir gretimų mazgų nuorodų pakeitimu.
   Pridėjimas
   [insert.png]
 
@@ -16,6 +16,3 @@ https://www.youtube.com/watch?v=_jQhALI4ujg&ab_channel=Computerphile
 
 Prie darant užduotis rekomenduojama perskaityti:
 https://www.tutorialspoint.com/data_structures_algorithms/linked_list_algorithms.htm
-
-
-
