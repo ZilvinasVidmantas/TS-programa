@@ -6,8 +6,6 @@ Darbo eiga:
 * '/public' aplanke sukurkite 'index.html' failą
 * įtraukite sukompiliuotą 'main.js' failą į jūsų sukurtą 'index.html' 
 * atlikite užduotis po vieną faile 'uzduotys/src/main.ts'
-  * panaudokite funkciją su savo sugalvotais argumentais
-  * atspausdinkite funkcijos argumentus ir funkcijos rezultatą
 
 Nepavykus išspręsti užduočių:
   1. https://google.lt 

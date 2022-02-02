@@ -23,5 +23,6 @@ module.exports = {
     'no-lone-blocks': [0],
     'no-inner-declarations': [0],
     'no-param-reassign': [0],
+    'no-empty': [0],
   },
 };
