@@ -16,7 +16,7 @@ module.exports = {
   ],
   rules: {
     quotes: [2, 'single'],
-    'max-len': [2, { code: 100, ignoreComments: true }],
+    'max-len': [0],
     'no-console': [0],
     '@typescript-eslint/no-unused-vars': ['2', { argsIgnorePattern: '^_' }],
     'no-lone-blocks': [0],
