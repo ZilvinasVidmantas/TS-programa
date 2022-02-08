@@ -1,4 +1,14 @@
-const people = [
+type Person = {
+  name: string,
+  surname: string,
+  readonly sex: "male" | "female",
+  age: number,
+  income?: number,
+  married?: boolean,
+  hasCar?: boolean,
+};
+
+const people: Person[] = [
   {
     name: 'Jonas',
     surname: 'Jonaitis',
@@ -54,9 +64,26 @@ const people = [
     hasCar: false
   }
 ];
-console.groupCollapsed('1. Atspausdinkite visus žmones eilutėmis');
+console.groupCollapsed('1. Sukurkite objekto tipą, kurio savybių pavadinimai būtų skaičiai, o reikšmės skaičių masyvai');
 {
-  // ...sprendimas ir spausdinimas
+  type Matrix = {
+    [index: number]: number[],
+  };
+
+  const obj1: Matrix = {
+    1: [1, 2, 3],
+    2: [4, 5, 6],
+    3: [7, 8, 9]
+  };
+
+  const obj2: Matrix = {
+    3: [1, 0, 0],
+    2: [1, 1, 1],
+    1: [0, 0, 0]
+  };
+
+  console.log(obj1);
+  console.log(obj2);
 }
 console.groupEnd();
 

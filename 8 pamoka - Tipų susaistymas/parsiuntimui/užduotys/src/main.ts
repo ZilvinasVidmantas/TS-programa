@@ -1,51 +1,4 @@
-
-
-
-type NodeTemplate<Type> = {
-  next?: NodeTemplate<Type>,
-  prev?: NodeTemplate<Type>,
-  data: Type,
-};
-
-type NumberNode = NodeTemplate<number>;
-
-const convertListToArray = <Type>(node: NodeTemplate<Type>)
-  : Type[] => {
-  const arr: Type[] = [];
-  do {
-    arr.push(node.data);
-    node = node.next;
-  } while (node && node.next !== null);
-  return arr;
-}
-
-
-const numberNode1: NumberNode = { data: 1 };
-const numberNode2: NumberNode = { data: 2 };
-const numberNode3: NumberNode = { data: 3 };
-
-numberNode1.next = numberNode2;
-numberNode2.next = numberNode3;
-numberNode2.prev = numberNode1;
-numberNode3.prev = numberNode2;
-
-const numberArray: number[] =
-  convertListToArray(numberNode1);
-
-
-
-
-type Person = {
-  name: string,
-  surname: string,
-  sex: "male" | "female",
-  age: number,
-  income: number,
-  married: boolean,
-  hasCar: boolean,
-};
-
-const people: Person[] = [
+const people = [
   {
     name: 'Jonas',
     surname: 'Jonaitis',
@@ -107,7 +60,7 @@ console.groupCollapsed('1. Atspausdinkite visus žmones eilutėmis');
 }
 console.groupEnd();
 
-console.groupCollapsed('2. Atpausdinkite visus žmonių varus ir pavardes, atskirtus brūkšneliu');
+console.groupCollapsed('2. Atpausdinkite visus žmonių vardus ir pavardes, atskirtus brūkšneliu');
 {
   // ...sprendimas ir spausdinimas
 }
