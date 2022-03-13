@@ -10,4 +10,4 @@ const handleFieldChange = (event) => {
     result.innerHTML = element.value;
 };
 inputField.addEventListener('keyup', handleFieldChange);
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=event-listener.js.map

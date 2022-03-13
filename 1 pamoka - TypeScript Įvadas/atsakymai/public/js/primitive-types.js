@@ -28,4 +28,4 @@ console.group('1. Priskirkite kintamiesiems duomenų tipus');
     });
 }
 console.groupEnd();
-//# sourceMappingURL=main.js.map
+//# sourceMappingURL=primitive-types.js.map
