@@ -1,13 +1,12 @@
 {
-  "name": "ts-tasks",
+  "name": "ts-projektas",
   "version": "1.0.0",
   "description": "",
   "main": "src/main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc --watch"
   },
-  "author": "Žilvinas Vidmantas",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.14.0",
