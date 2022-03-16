@@ -14,8 +14,9 @@ const people: Person[] = [
     surname: 'Jonaitis',
     sex: 'male',
     age: 26,
+    income: 1200,
     married: false,
-    hasCar: true,
+    hasCar: false,
   },
   {
     name: 'Severija',
@@ -23,6 +24,7 @@ const people: Person[] = [
     sex: 'female',
     age: 26,
     income: 1300,
+    married: false,
     hasCar: true,
   },
   {
@@ -30,7 +32,9 @@ const people: Person[] = [
     surname: 'Vilktorinas',
     sex: 'male',
     age: 16,
+    income: 0,
     married: false,
+    hasCar: false,
   },
   {
     name: 'Virginijus',
@@ -47,6 +51,7 @@ const people: Person[] = [
     sex: 'female',
     age: 28,
     income: 1200,
+    married: true,
     hasCar: true,
   },
   {
@@ -55,12 +60,23 @@ const people: Person[] = [
     sex: 'female',
     age: 72,
     income: 364,
+    married: false,
     hasCar: false,
   },
 ];
 
-// !!! UŽDUOTIS ATLIKTI APRAŠANT TIPUS !!!
-// !!! UŽDUOTIS ATLIKTI KURIANT FUNKCIJAS, pilnai jas aprašant tipais !!!
+/*
+  Šių užduočių tikslas ne tik išspręsti užduotis, bet išmokti kurti tipus pagal jau esančius tipus
+  Pirmos 2 užduotys pateikiamos kaip pavyzdžiai kaip turėtų būt sprendžiami uždaviniai:
+    * Aprašome tipus
+    * Aprašome funkcijas
+    * (jeigu reikia aprašome naujus kintamuosius reikalingus sprendimui)
+    * Atliekame užduoties sprendimą
+    * Spausdiname sprendimo rezultatus
+  
+  Visas funkcijas ir kintamuosius reikia aprašyti tipais (net jei to ir nereikalauja TS compiler'is)
+    
+*/
 console.groupCollapsed('1. Sukurkite funkciją, kuri paverčia žmogaus objektą -> {name: string, surname: string} objektu. Naudojant šią funkciją performuokite visą žmonių masyvą');
 {
   // Tipai:
@@ -85,17 +101,12 @@ console.groupEnd();
 
 console.groupCollapsed('2. Sukurkite funkciją, kuri paverčia žmogaus objektą -> {married: boolean, hasCar: boolean} objektu. Naudojant šią funkciją performuokite visą žmonių masyvą.');
 {
-  type TaskProps = {
-    married: boolean,
-    hasCar: boolean,
-  }
-
   // type TaskProps = {
   //   married: NonNullable<Person["married"]>,
   //   hasCar: NonNullable<Person["hasCar"]>,
   // }
 
-  // type TaskProps = Pick<Required<Person>, "hasCar" | "married">;
+  type TaskProps = Pick<Required<Person>, "hasCar" | "married">;
 
   const selectTaskProps = ({ married, hasCar }: Person): TaskProps => ({
     married: Boolean(married),
@@ -130,8 +141,8 @@ console.groupEnd();
 
 console.groupCollapsed('4. Suformuokite visų vyrų masyvą');
 {
-  type Male = {
-    [Key in keyof Person]: Key extends 'sex' ? 'male' : Person[Key];
+  type Male = Omit<Person, 'sex'> & {
+    sex: 'male',
   }
 
   const isMale = ({ sex }: Person): boolean => sex === 'male';
@@ -145,8 +156,8 @@ console.groupEnd();
 
 console.groupCollapsed('5. Suformuokite visų moterų masyvą');
 {
-  type Female = {
-    [Key in keyof Person]: Key extends 'sex' ? 'female' : Person[Key];
+  type Female = Omit<Person, 'sex'> & {
+    sex: 'female',
   }
 
   const isFemale = ({ sex }: Person): boolean => sex === 'female';
@@ -234,12 +245,13 @@ console.groupEnd();
 
 console.groupCollapsed('9. Performuokite žmonių masyvą, jog kiekvieno žmogaus savybė "income", taptų "salary"');
 {
-  type PersonBritish = {
-    [Key in keyof Person as Key extends 'income' ? 'salary' : Key]: Person[Key]
+  type PersonBritish = Omit<Person, 'income'> & {
+    salary?: Person['income']
   }
 
   const convertToBritish = ({ income, ...person }: Person): PersonBritish => {
-    const result: PersonBritish = { ...person }
+    const result: PersonBritish = { ...person };
+
     if (income) result.salary = income;
 
     return result;

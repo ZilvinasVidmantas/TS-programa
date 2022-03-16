@@ -5,8 +5,9 @@ const people = [
         surname: 'Jonaitis',
         sex: 'male',
         age: 26,
+        income: 1200,
         married: false,
-        hasCar: true,
+        hasCar: false,
     },
     {
         name: 'Severija',
@@ -14,6 +15,7 @@ const people = [
         sex: 'female',
         age: 26,
         income: 1300,
+        married: false,
         hasCar: true,
     },
     {
@@ -21,7 +23,9 @@ const people = [
         surname: 'Vilktorinas',
         sex: 'male',
         age: 16,
+        income: 0,
         married: false,
+        hasCar: false,
     },
     {
         name: 'Virginijus',
@@ -38,6 +42,7 @@ const people = [
         sex: 'female',
         age: 28,
         income: 1200,
+        married: true,
         hasCar: true,
     },
     {
@@ -46,6 +51,7 @@ const people = [
         sex: 'female',
         age: 72,
         income: 364,
+        married: false,
         hasCar: false,
     },
 ];
