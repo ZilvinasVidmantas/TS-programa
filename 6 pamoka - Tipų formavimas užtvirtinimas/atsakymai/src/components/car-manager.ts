@@ -4,7 +4,7 @@ import models from '../data/models';
 import SelectField, { SelectFieldProps } from './select-field';
 import Table from './table';
 import CarJoined from '../types/car-joined';
-import createJoinedCars from '../helpers/create-joined-cars';
+import CarsCollection from '../helpers/cars-collection';
 import stringifyProps from '../helpers/stingify-object';
 
 type CarJoinedStringified = {
@@ -18,7 +18,10 @@ class CarManager {
 
   private carTable: Table<CarJoinedStringified>;
 
+  private carsCollection: CarsCollection;
+
   public constructor() {
+    this.carsCollection = new CarsCollection({ cars, brands, models });
     this.htmlElement = document.createElement('div');
     this.brandSelect = this.createBrandSelect();
     this.carTable = this.createCarTable();
@@ -27,17 +30,16 @@ class CarManager {
   }
 
   private createCarTable = (): Table<CarJoinedStringified> => {
-    const joinedCars = createJoinedCars({ cars, brands, models });
-    const joinedCarsStringified = joinedCars.map((car) => stringifyProps(car));
+    const joinedCarsStringified = this.carsCollection.all.map(stringifyProps);
 
     return new Table({
       title: 'Visi automobiliai',
       columns: {
         id: 'Id',
+        brand: 'Markė',
+        model: 'Modelis',
         price: 'Kaina $',
         year: 'Metai',
-        model: 'Markė',
-        brand: 'Modelis',
       },
       rowsData: joinedCarsStringified,
       onDelete: this.deleteCar,
@@ -62,17 +64,22 @@ class CarManager {
     return brandSelect;
   };
 
+  // eslint-disable-next-line class-methods-use-this
   private deleteCar = (id: string) => {
     throw new Error(`Car deletion not implemented: ${id}`);
   };
 
+  // eslint-disable-next-line class-methods-use-this
   private editCar = (id: string) => {
     throw new Error(`Car edit not implemented: ${id}`);
   };
 
-  private changeBrand: SelectFieldProps['onChange'] = (newBrand) => {
-    console.log(this);
-    console.log(newBrand);
+  private changeBrand: SelectFieldProps['onChange'] = (id: string) => {
+    const rowsData = this.carsCollection
+      .getByBrandId(id)
+      .map(stringifyProps);
+
+    this.carTable.updateProps({ rowsData });
   };
 
   private initialize = () => {

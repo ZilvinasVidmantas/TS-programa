@@ -80,6 +80,14 @@ class Table<Type extends RowData> {
     rowHtmlElement.append(buttonCell);
   };
 
+  public updateProps = (newProps: Partial<TableProps<Type>>): void => {
+    this.props = {
+      ...this.props,
+      ...newProps,
+    };
+    this.updateView();
+  };
+
   public updateTHeadView = (): void => {
     const { title, columns } = this.props;
 
@@ -100,6 +108,7 @@ class Table<Type extends RowData> {
   public updateTBodyView = (): void => {
     const { rowsData, columns } = this.props;
 
+    this.tbody.innerHTML = '';
     const rowsHtmlElements = rowsData
       .map((rowData) => {
         const rowHtmlElement = document.createElement('tr');
