@@ -49,6 +49,8 @@ class CarsCollection {
   public getByModelId = (modelId: string): CarJoined[] => {
     const { cars } = this.props;
 
+    if (modelId === '-1') return this.all;
+
     const modelCars = cars
       .filter((car) => car.modelId === modelId)
       .map(this.joinCar);

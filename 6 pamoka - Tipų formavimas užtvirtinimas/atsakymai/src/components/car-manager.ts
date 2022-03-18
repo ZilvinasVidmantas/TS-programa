@@ -48,10 +48,13 @@ class CarManager {
   };
 
   private createBrandSelect = (): SelectField => {
-    const brandOptions: SelectFieldProps['options'] = brands.map((brand) => ({
-      title: brand.title,
-      value: brand.id,
-    }));
+    const brandOptions: SelectFieldProps['options'] = [
+      { title: 'Visos markės', value: '-1' },
+      ...brands.map((brand) => ({
+        title: brand.title,
+        value: brand.id,
+      })),
+    ];
 
     const brandSelectProps: SelectFieldProps = {
       title: 'Markė',
@@ -74,12 +77,19 @@ class CarManager {
     throw new Error(`Car edit not implemented: ${id}`);
   };
 
-  private changeBrand: SelectFieldProps['onChange'] = (id: string) => {
-    const rowsData = this.carsCollection
-      .getByBrandId(id)
-      .map(stringifyProps);
-
-    this.carTable.updateProps({ rowsData });
+  private changeBrand: SelectFieldProps['onChange'] = (brandId: string) => {
+    const selectedBrand = brands.find((brand) => brand.id === brandId);
+    if (brandId === '-1' || selectedBrand === undefined) {
+      this.carTable.updateProps({
+        title: 'Visi automobiliai',
+        rowsData: this.carsCollection.all.map(stringifyProps),
+      });
+    } else {
+      this.carTable.updateProps({
+        title: `${selectedBrand.title} markės automobiliai`,
+        rowsData: this.carsCollection.getByBrandId(brandId).map(stringifyProps),
+      });
+    }
   };
 
   private initialize = () => {
