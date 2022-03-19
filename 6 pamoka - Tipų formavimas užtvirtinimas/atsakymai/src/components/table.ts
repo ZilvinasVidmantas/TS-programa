@@ -5,12 +5,13 @@ type RowData = {
   [key: string]: string,
 };
 
-type TableProps<Type> = {
+export type TableProps<Type> = {
   title: string,
   columns: Type,
   rowsData: Type[],
   onDelete: (id: string) => void,
   onEdit: (id: string) => void,
+  editedRowId: string | null,
 };
 
 class Table<Type extends RowData> {
@@ -61,20 +62,27 @@ class Table<Type extends RowData> {
   };
 
   private addActionButtonsCells = (rowHtmlElement: HTMLTableRowElement, id: string) => {
-    const { onEdit, onDelete } = this.props;
+    const { editedRowId, onEdit, onDelete } = this.props;
 
     const buttonCell = document.createElement('td');
+
     const editButton = document.createElement('button');
     editButton.type = 'button';
     editButton.innerHTML = 'Edit';
     editButton.className = 'btn btn-warning me-3';
     editButton.addEventListener('click', () => onEdit(id));
+    editButton.style.width = '80px';
+    if (editedRowId === id) {
+      editButton.innerHTML = 'Cancel';
+      editButton.classList.replace('btn-warning', 'btn-light');
+    }
 
     const deleteButton = document.createElement('button');
     editButton.type = 'button';
     deleteButton.innerHTML = 'Delete';
     deleteButton.className = 'btn btn-danger';
     deleteButton.addEventListener('click', () => onDelete(id));
+    deleteButton.style.width = '80px';
 
     buttonCell.append(editButton, deleteButton);
     rowHtmlElement.append(buttonCell);
@@ -98,12 +106,13 @@ class Table<Type extends RowData> {
   };
 
   private updateTBodyView = (): void => {
-    const { rowsData, columns } = this.props;
+    const { rowsData, columns, editedRowId } = this.props;
 
     this.tbody.innerHTML = '';
     const rowsHtmlElements = rowsData
       .map((rowData) => {
         const rowHtmlElement = document.createElement('tr');
+        if (editedRowId === rowData.id) rowHtmlElement.style.backgroundColor = '#fea';
 
         const cellsHtmlString = Object.keys(columns)
           .map((key) => `<td>${rowData[key]}</td>`)
@@ -128,6 +137,7 @@ class Table<Type extends RowData> {
       ...this.props,
       ...partialNewProps,
     };
+
     this.updateView();
   };
 }

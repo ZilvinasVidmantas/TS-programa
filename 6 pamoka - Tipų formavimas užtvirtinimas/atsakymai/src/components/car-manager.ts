@@ -2,7 +2,7 @@ import brands from '../data/brands';
 import cars from '../data/cars';
 import models from '../data/models';
 import SelectField, { SelectFieldProps } from './select-field';
-import Table from './table';
+import Table, { TableProps } from './table';
 import CarJoined from '../types/car-joined';
 import CarsCollection from '../helpers/cars-collection';
 import stringifyProps from '../helpers/stingify-object';
@@ -14,7 +14,7 @@ type CarJoinedStringified = {
 type CarManagerState = {
   selectedBrandId: string | null,
   selectedModelId: string | null,
-  carEditedId: string | null,
+  editedCarId: string | null,
 };
 
 class CarManager {
@@ -35,7 +35,7 @@ class CarManager {
     this.state = {
       selectedBrandId: null,
       selectedModelId: null,
-      carEditedId: null,
+      editedCarId: null,
     };
 
     this.brandSelect = new SelectField({
@@ -60,6 +60,7 @@ class CarManager {
         year: 'Metai',
       },
       rowsData: this.carsCollection.all.map(stringifyProps),
+      editedRowId: this.state.editedCarId,
       onDelete: this.deleteCar,
       onEdit: this.editCar,
     });
@@ -82,9 +83,10 @@ class CarManager {
     this.update();
   };
 
-  // eslint-disable-next-line class-methods-use-this
   private editCar = (id: string) => {
-    throw new Error(`Car edit not implemented: ${id}`);
+    this.setState({
+      editedCarId: id === this.state.editedCarId ? null : id,
+    });
   };
 
   private changeBrand: SelectFieldProps['onChange'] = (brandId: string) => {
@@ -105,19 +107,21 @@ class CarManager {
   };
 
   private update = () => {
-    const { selectedBrandId } = this.state;
+    const { selectedBrandId, editedCarId } = this.state;
 
-    const foundBrand = brands.find((brand) => brand.id === selectedBrandId);
+    const brandFound = brands.find((brand) => brand.id === selectedBrandId);
 
-    const title = foundBrand ? `${foundBrand.title} markės automobiliai` : 'Visi automobiliai';
-    const rowsData = (
-      selectedBrandId && foundBrand
-        ? this.carsCollection.getByBrandId(selectedBrandId)
-        : this.carsCollection.all
-    )
-      .map(stringifyProps);
+    const tableProps: Partial<TableProps<CarJoinedStringified>> = {
+      title: brandFound ? `${brandFound.title} markės automobiliai` : 'Visi automobiliai',
+      rowsData: (
+        selectedBrandId && brandFound
+          ? this.carsCollection.getByBrandId(selectedBrandId)
+          : this.carsCollection.all
+      ).map(stringifyProps),
+      editedRowId: editedCarId,
+    };
 
-    this.carTable.updateProps({ title, rowsData });
+    this.carTable.updateProps(tableProps);
   };
 }
 
