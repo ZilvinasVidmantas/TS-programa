@@ -76,9 +76,10 @@ class CarManager {
     this.update();
   };
 
-  // eslint-disable-next-line class-methods-use-this
   private deleteCar = (id: string) => {
-    throw new Error(`Car delete not implemented: ${id}`);
+    this.carsCollection.deleteCarById(id);
+
+    this.update();
   };
 
   // eslint-disable-next-line class-methods-use-this
