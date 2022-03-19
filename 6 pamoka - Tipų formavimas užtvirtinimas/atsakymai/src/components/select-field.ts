@@ -6,7 +6,7 @@ type OptionType = {
 export type SelectFieldProps = {
   title: string,
   options: OptionType[],
-  onChange: (value: string) => void,
+  onChange?: (value: string) => void,
 };
 
 class SelectField {

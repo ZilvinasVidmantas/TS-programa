@@ -1,15 +1,24 @@
 import TextField, { TextFieldProps } from './text-field';
+import SelectField, { SelectFieldProps } from './select-field';
+
+type FieldProps = TextFieldProps | SelectFieldProps;
+
+type Field = TextField | SelectField;
 
 type FormProps = {
   title: string,
   submitText: string,
-  fieldsProps: TextFieldProps[],
+  fieldsProps: FieldProps[],
 };
+
+function isSelectFieldProps(fieldProps: FieldProps): fieldProps is SelectFieldProps {
+  return (fieldProps as SelectFieldProps).options !== undefined;
+}
 
 class Form {
   private props: FormProps;
 
-  private fields: TextField[];
+  private fields: Field[];
 
   // private header: HTMLHeadingElement;
 
@@ -20,7 +29,12 @@ class Form {
   constructor(props: FormProps) {
     this.props = props;
     this.htmlElement = document.createElement('form');
-    this.fields = props.fieldsProps.map((fieldProps) => new TextField(fieldProps));
+    this.fields = props.fieldsProps.map((fieldProps) => {
+      if (isSelectFieldProps(fieldProps)) {
+        return new SelectField(fieldProps);
+      }
+      return new TextField(fieldProps);
+    });
 
     this.initialize();
   }

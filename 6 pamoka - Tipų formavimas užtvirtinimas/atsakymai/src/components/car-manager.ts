@@ -4,7 +4,7 @@ import models from '../data/models';
 import CarJoined from '../types/car-joined';
 import stringifyProps from '../helpers/stingify-object';
 import CarsCollection from '../helpers/cars-collection';
-import SelectField, { SelectFieldProps } from './select-field';
+import SelectField from './select-field';
 import Table, { TableProps } from './table';
 import Form from './form';
 
@@ -74,6 +74,26 @@ class CarManager {
       fieldsProps: [
         { name: 'brand', labelText: 'Markė', initialValue: '' },
         { name: 'model', labelText: 'Modelis', initialValue: '' },
+        {
+          title: 'Markė',
+          options: [
+            ...brands.map((brand) => ({
+              title: brand.title,
+              value: brand.id,
+            })),
+          ],
+        },
+        {
+          title: 'Modelis',
+          options: [
+            ...models
+              .filter((model) => model.brandId === brands[0].id)
+              .map((brand) => ({
+                title: brand.title,
+                value: brand.id,
+              })),
+          ],
+        },
       ],
     });
 
@@ -101,7 +121,7 @@ class CarManager {
     });
   };
 
-  private changeBrand: SelectFieldProps['onChange'] = (brandId) => {
+  private changeBrand = (brandId: string) => {
     const selectedBrand = brands.find((brand) => brand.id === brandId);
     this.setState({
       selectedBrandId: selectedBrand?.id ?? null,
