@@ -1,11 +1,12 @@
 import brands from '../data/brands';
 import cars from '../data/cars';
 import models from '../data/models';
+import CarJoined from '../types/car-joined';
+import stringifyProps from '../helpers/stingify-object';
+import CarsCollection from '../helpers/cars-collection';
 import SelectField, { SelectFieldProps } from './select-field';
 import Table, { TableProps } from './table';
-import CarJoined from '../types/car-joined';
-import CarsCollection from '../helpers/cars-collection';
-import stringifyProps from '../helpers/stingify-object';
+import Form from './form';
 
 type CarJoinedStringified = {
   [Key in keyof CarJoined]: string;
@@ -22,11 +23,13 @@ class CarManager {
 
   private state: CarManagerState;
 
-  private carTable: Table<CarJoinedStringified>;
+  private carsCollection: CarsCollection;
 
   private brandSelect: SelectField;
 
-  private carsCollection: CarsCollection;
+  private table: Table<CarJoinedStringified>;
+
+  private form: Form;
 
   public constructor() {
     this.htmlElement = document.createElement('div');
@@ -50,19 +53,28 @@ class CarManager {
       onChange: this.changeBrand,
     });
 
-    this.carTable = new Table({
+    this.table = new Table({
       title: 'Visi automobiliai',
       columns: {
         id: 'Id',
         brand: 'Markė',
         model: 'Modelis',
-        price: 'Kaina $',
+        price: 'Kaina',
         year: 'Metai',
       },
       rowsData: this.carsCollection.all.map(stringifyProps),
       editedRowId: this.state.editedCarId,
       onDelete: this.deleteCar,
       onEdit: this.editCar,
+    });
+
+    this.form = new Form({
+      title: 'Pridėti automobilį',
+      submitText: 'Pridėti',
+      fieldsProps: [
+        { name: 'brand', labelText: 'Markė', initialValue: '' },
+        { name: 'model', labelText: 'Modelis', initialValue: '' },
+      ],
     });
 
     this.initialize();
@@ -89,7 +101,7 @@ class CarManager {
     });
   };
 
-  private changeBrand: SelectFieldProps['onChange'] = (brandId: string) => {
+  private changeBrand: SelectFieldProps['onChange'] = (brandId) => {
     const selectedBrand = brands.find((brand) => brand.id === brandId);
     this.setState({
       selectedBrandId: selectedBrand?.id ?? null,
@@ -97,12 +109,19 @@ class CarManager {
   };
 
   private initialize = () => {
-    this.htmlElement.className = 'card p-3 my-4 shadow';
+    this.htmlElement.className = 'container my-4';
     this.htmlElement.innerHTML = '<h2 class="text-center">Automobilių tvarkyklė</h2>';
+
+    const tableAndFormWrapper = document.createElement('div');
+    tableAndFormWrapper.className = 'd-flex gap-4 mt-4 align-items-start';
+    tableAndFormWrapper.append(
+      this.table.htmlElement,
+      this.form.htmlElement,
+    );
 
     this.htmlElement.append(
       this.brandSelect.htmlElement,
-      this.carTable.htmlElement,
+      tableAndFormWrapper,
     );
   };
 
@@ -121,7 +140,7 @@ class CarManager {
       editedRowId: editedCarId,
     };
 
-    this.carTable.updateProps(tableProps);
+    this.table.updateProps(tableProps);
   };
 }
 

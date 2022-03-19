@@ -50,7 +50,9 @@ class SelectField {
     const selectHtmlElement = document.createElement('select');
     selectHtmlElement.className = 'form-select';
     selectHtmlElement.id = `select-${SelectField.uniqId}`;
-    selectHtmlElement.addEventListener('change', () => onChange(selectHtmlElement.value));
+    if (onChange) {
+      selectHtmlElement.addEventListener('change', () => onChange(selectHtmlElement.value));
+    }
 
     const optionsHtmlElements = this.createOptions();
     selectHtmlElement.append(...optionsHtmlElements);

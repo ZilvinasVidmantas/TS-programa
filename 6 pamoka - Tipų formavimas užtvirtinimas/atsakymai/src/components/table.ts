@@ -53,7 +53,7 @@ class Table<Type extends RowData> {
   };
 
   private initialize = (): void => {
-    this.htmlElement.className = 'table border my-3';
+    this.htmlElement.className = 'table table-striped order border p-3';
     this.htmlElement.append(
       this.thead,
       this.tbody,
@@ -72,6 +72,7 @@ class Table<Type extends RowData> {
     editButton.className = 'btn btn-warning me-3';
     editButton.addEventListener('click', () => onEdit(id));
     editButton.style.width = '80px';
+
     if (editedRowId === id) {
       editButton.innerHTML = 'Cancel';
       editButton.classList.replace('btn-warning', 'btn-light');
@@ -99,7 +100,7 @@ class Table<Type extends RowData> {
 
     this.thead.innerHTML = `
       <tr>
-        <th colspan="${headers.length}" class="text-center">${title}</th>
+        <th colspan="${headers.length}" class="text-center h3">${title}</th>
       </tr>
       <tr>${headersRowHtmlString}</tr>
     `;

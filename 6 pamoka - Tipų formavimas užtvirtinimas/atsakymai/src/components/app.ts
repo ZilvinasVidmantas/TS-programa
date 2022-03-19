@@ -15,7 +15,6 @@ class App {
     const carManager = new CarManager();
 
     const container = document.createElement('div');
-    container.className = 'container';
     container.appendChild(carManager.htmlElement);
 
     this.htmlElement.append(container);
