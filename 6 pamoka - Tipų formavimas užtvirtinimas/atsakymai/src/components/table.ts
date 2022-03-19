@@ -80,15 +80,7 @@ class Table<Type extends RowData> {
     rowHtmlElement.append(buttonCell);
   };
 
-  public updateProps = (newProps: Partial<TableProps<Type>>): void => {
-    this.props = {
-      ...this.props,
-      ...newProps,
-    };
-    this.updateView();
-  };
-
-  public updateTHeadView = (): void => {
+  private updateTHeadView = (): void => {
     const { title, columns } = this.props;
 
     const headers = [
@@ -105,7 +97,7 @@ class Table<Type extends RowData> {
     `;
   };
 
-  public updateTBodyView = (): void => {
+  private updateTBodyView = (): void => {
     const { rowsData, columns } = this.props;
 
     this.tbody.innerHTML = '';
@@ -126,9 +118,17 @@ class Table<Type extends RowData> {
     this.tbody.append(...rowsHtmlElements);
   };
 
-  public updateView = (): void => {
+  private updateView = (): void => {
     this.updateTHeadView();
     this.updateTBodyView();
+  };
+
+  public updateProps = (partialNewProps: Partial<TableProps<Type>> = {}): void => {
+    this.props = {
+      ...this.props,
+      ...partialNewProps,
+    };
+    this.updateView();
   };
 }
 

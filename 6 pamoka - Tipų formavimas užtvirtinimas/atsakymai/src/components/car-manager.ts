@@ -11,28 +11,46 @@ type CarJoinedStringified = {
   [Key in keyof CarJoined]: string;
 };
 
+type CarManagerState = {
+  selectedBrandId: string | null,
+  selectedModelId: string | null,
+  carEditedId: string | null,
+};
+
 class CarManager {
   public htmlElement: HTMLDivElement;
 
-  private brandSelect: SelectField;
+  private state: CarManagerState;
 
   private carTable: Table<CarJoinedStringified>;
+
+  private brandSelect: SelectField;
 
   private carsCollection: CarsCollection;
 
   public constructor() {
-    this.carsCollection = new CarsCollection({ cars, brands, models });
     this.htmlElement = document.createElement('div');
-    this.brandSelect = this.createBrandSelect();
-    this.carTable = this.createCarTable();
+    this.carsCollection = new CarsCollection({ cars, brands, models });
 
-    this.initialize();
-  }
+    this.state = {
+      selectedBrandId: null,
+      selectedModelId: null,
+      carEditedId: null,
+    };
 
-  private createCarTable = (): Table<CarJoinedStringified> => {
-    const joinedCarsStringified = this.carsCollection.all.map(stringifyProps);
+    this.brandSelect = new SelectField({
+      title: 'Markė',
+      options: [
+        { title: 'Visos markės', value: '-1' },
+        ...brands.map((brand) => ({
+          title: brand.title,
+          value: brand.id,
+        })),
+      ],
+      onChange: this.changeBrand,
+    });
 
-    return new Table({
+    this.carTable = new Table({
       title: 'Visi automobiliai',
       columns: {
         id: 'Id',
@@ -41,35 +59,26 @@ class CarManager {
         price: 'Kaina $',
         year: 'Metai',
       },
-      rowsData: joinedCarsStringified,
+      rowsData: this.carsCollection.all.map(stringifyProps),
       onDelete: this.deleteCar,
       onEdit: this.editCar,
     });
-  };
 
-  private createBrandSelect = (): SelectField => {
-    const brandOptions: SelectFieldProps['options'] = [
-      { title: 'Visos markės', value: '-1' },
-      ...brands.map((brand) => ({
-        title: brand.title,
-        value: brand.id,
-      })),
-    ];
+    this.initialize();
+  }
 
-    const brandSelectProps: SelectFieldProps = {
-      title: 'Markė',
-      options: brandOptions,
-      onChange: this.changeBrand,
+  private setState = (partialNewState: Partial<CarManagerState>): void => {
+    this.state = {
+      ...this.state,
+      ...partialNewState,
     };
 
-    const brandSelect = new SelectField(brandSelectProps);
-
-    return brandSelect;
+    this.update();
   };
 
   // eslint-disable-next-line class-methods-use-this
   private deleteCar = (id: string) => {
-    throw new Error(`Car deletion not implemented: ${id}`);
+    throw new Error(`Car delete not implemented: ${id}`);
   };
 
   // eslint-disable-next-line class-methods-use-this
@@ -79,17 +88,9 @@ class CarManager {
 
   private changeBrand: SelectFieldProps['onChange'] = (brandId: string) => {
     const selectedBrand = brands.find((brand) => brand.id === brandId);
-    if (brandId === '-1' || selectedBrand === undefined) {
-      this.carTable.updateProps({
-        title: 'Visi automobiliai',
-        rowsData: this.carsCollection.all.map(stringifyProps),
-      });
-    } else {
-      this.carTable.updateProps({
-        title: `${selectedBrand.title} markės automobiliai`,
-        rowsData: this.carsCollection.getByBrandId(brandId).map(stringifyProps),
-      });
-    }
+    this.setState({
+      selectedBrandId: selectedBrand?.id ?? null,
+    });
   };
 
   private initialize = () => {
@@ -100,6 +101,22 @@ class CarManager {
       this.brandSelect.htmlElement,
       this.carTable.htmlElement,
     );
+  };
+
+  private update = () => {
+    const { selectedBrandId } = this.state;
+
+    const foundBrand = brands.find((brand) => brand.id === selectedBrandId);
+
+    const title = foundBrand ? `${foundBrand.title} markės automobiliai` : 'Visi automobiliai';
+    const rowsData = (
+      selectedBrandId && foundBrand
+        ? this.carsCollection.getByBrandId(selectedBrandId)
+        : this.carsCollection.all
+    )
+      .map(stringifyProps);
+
+    this.carTable.updateProps({ title, rowsData });
   };
 }
 
