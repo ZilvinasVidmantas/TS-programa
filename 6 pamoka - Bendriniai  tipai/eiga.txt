@@ -1,5 +1,4 @@
 Bendriniai tipai - tai duomenų tipo nustatymas vykdymo metu.
-Aprašant funkcijas su bendriniais tipais, bendriniai tipai gali automatiškai, jeigu parametrai yra aprašomi bendriniais tipais.
 [pav-1.jpg]
 
 Bendrinai tipai naudojami, kuomet funkcijos/klasės gali atlikti veiksmus su tam tikra tipų aibe.
@@ -11,7 +10,15 @@ Bendriniai tipai gali būt naudojami kurti tipams, kurie priklauso nuo kitų tip
 [pav-3.jpg]
 [pav-4.jpg]
 
-Bendriniai tipai gali būt naudojami ir aprašant klases. Aprašius klaei bendrinį tipą, jis galioja visoje klasėje.
+Bendriniai tipai gali būt naudojami ir aprašant klases. Aprašius klasei bendrinį tipą, jis galioja visoje klasėje.
 Kuriant klasės objektą, reikia nurodyti bendrinį tipą.
-
 [pav-5.jpg]
+
+Atlikite užduotis aplanke './uzduotys'
+
+Pasitikrinkite užduotis aplanke './atsakymai'
+
+Pasiruoškite rytojui ir susipažinkite su Sąrašo duomenų struktūra:
+  * https://www.youtube.com/watch?v=_jQhALI4ujg&ab_channel=Computerphile
+  * https://www.youtube.com/watch?v=DyG9S9nAlUM&ab_channel=Computerphile
+  * https://www.youtube.com/watch?v=t5NszbIerYc&ab_channel=Computerphile
