@@ -4,9 +4,11 @@ type OptionType = {
 };
 
 export type SelectFieldProps = {
-  title: string,
+  name?: string,
+  labelText: string,
+  initialValue?: string,
+  onChange?: (changeData: { name?: string, value: string }) => void,
   options: OptionType[],
-  onChange?: (value: string) => void,
 };
 
 class SelectField {
@@ -25,19 +27,14 @@ class SelectField {
   }
 
   private createOptions = (): HTMLOptionElement[] => {
-    const { options } = this.props;
+    const { options, initialValue } = this.props;
 
     const optionsHtmlElements = options.map((option, i) => {
       const element = document.createElement('option');
-      element.selected = i === 0;
+      element.selected = initialValue ? option.value === initialValue : i === 0;
+      element.innerHTML = option.title;
+      element.value = option.value;
 
-      if (typeof option === 'string') {
-        element.innerHTML = option;
-        element.value = option;
-      } else {
-        element.innerHTML = option.title;
-        element.value = option.value;
-      }
       return element;
     });
 
@@ -45,13 +42,17 @@ class SelectField {
   };
 
   private createSelectHtmlElement = (): HTMLSelectElement => {
-    const { onChange } = this.props;
+    const { name, onChange } = this.props;
 
     const selectHtmlElement = document.createElement('select');
     selectHtmlElement.className = 'form-select';
     selectHtmlElement.id = `select-${SelectField.uniqId}`;
+    if (name) selectHtmlElement.name = name;
     if (onChange) {
-      selectHtmlElement.addEventListener('change', () => onChange(selectHtmlElement.value));
+      selectHtmlElement.addEventListener('change', () => onChange({
+        name: name ?? 'anonymous',
+        value: selectHtmlElement.value,
+      }));
     }
 
     const optionsHtmlElements = this.createOptions();
@@ -61,10 +62,10 @@ class SelectField {
   };
 
   private initialize = () => {
-    const { title } = this.props;
+    const { labelText } = this.props;
     const selectHtmlElement = this.createSelectHtmlElement();
 
-    this.htmlElement.innerHTML = `<label for="select-${SelectField.uniqId}">${title}</label>`;
+    this.htmlElement.innerHTML = `<label for="select-${SelectField.uniqId}">${labelText}</label>`;
     this.htmlElement.className = 'form-group';
     this.htmlElement.append(selectHtmlElement);
   };

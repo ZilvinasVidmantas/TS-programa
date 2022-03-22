@@ -42,7 +42,7 @@ class CarManager {
     };
 
     this.brandSelect = new SelectField({
-      title: 'Markė',
+      labelText: 'Markė',
       options: [
         { title: 'Visos markės', value: '-1' },
         ...brands.map((brand) => ({
@@ -50,7 +50,7 @@ class CarManager {
           value: brand.id,
         })),
       ],
-      onChange: this.changeBrand,
+      onChange: this.changeBrandFilter,
     });
 
     this.table = new Table({
@@ -75,16 +75,21 @@ class CarManager {
         { name: 'brand', labelText: 'Markė', initialValue: '' },
         { name: 'model', labelText: 'Modelis', initialValue: '' },
         {
-          title: 'Markė',
+          name: 'brand',
+          labelText: 'Markė',
+          initialValue: brands[0].id,
           options: [
             ...brands.map((brand) => ({
               title: brand.title,
               value: brand.id,
             })),
           ],
+          onChange: this.changeFormBrand,
         },
         {
-          title: 'Modelis',
+          name: 'model',
+          labelText: 'Modelis',
+          initialValue: models[0].id,
           options: [
             ...models
               .filter((model) => model.brandId === brands[0].id)
@@ -93,6 +98,7 @@ class CarManager {
                 value: brand.id,
               })),
           ],
+          onChange: this.changeFormModel,
         },
       ],
     });
@@ -121,10 +127,28 @@ class CarManager {
     });
   };
 
-  private changeBrand = (brandId: string) => {
+  private changeBrandFilter = ({ value: brandId }: { value: string }) => {
     const selectedBrand = brands.find((brand) => brand.id === brandId);
     this.setState({
       selectedBrandId: selectedBrand?.id ?? null,
+    });
+  };
+
+  private changeFormBrand = ({ value: brandId, name }: { name: string, value: string }): void => {
+    console.warn('changeFormBrand is not implemented');
+    console.log({
+      selectedBrandId: this.state.selectedBrandId,
+      newBrandId: brandId,
+      name,
+    });
+  };
+
+  private changeFormModel = ({ value: modelId, name }: { name: string, value: string }): void => {
+    console.warn('changeFormModel is not implemented');
+    console.log({
+      selectedBrandId: this.state.selectedBrandId,
+      newModelId: modelId,
+      name,
     });
   };
 
