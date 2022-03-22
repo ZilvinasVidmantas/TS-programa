@@ -1,20 +1,21 @@
-import brands from '../data/brands';
 import cars from '../data/cars';
+import brands from '../data/brands';
 import models from '../data/models';
 import CarJoined from '../types/car-joined';
 import stringifyProps from '../helpers/stingify-object';
 import CarsCollection from '../helpers/cars-collection';
 import SelectField from './select-field';
 import Table, { TableProps } from './table';
-import Form from './form';
+import Form, { FormProps } from './form';
 
 type CarJoinedStringified = {
   [Key in keyof CarJoined]: string;
 };
 
 type CarManagerState = {
-  selectedBrandId: string | null,
-  selectedModelId: string | null,
+  selectedBrandFilterId: string | null,
+  selectedModelFilterId: string | null,
+  selectedBrandFormId: string;
   editedCarId: string | null,
 };
 
@@ -36,8 +37,9 @@ class CarManager {
     this.carsCollection = new CarsCollection({ cars, brands, models });
 
     this.state = {
-      selectedBrandId: null,
-      selectedModelId: null,
+      selectedBrandFilterId: null,
+      selectedModelFilterId: null,
+      selectedBrandFormId: brands[0].id,
       editedCarId: null,
     };
 
@@ -89,7 +91,6 @@ class CarManager {
         {
           name: 'model',
           labelText: 'Modelis',
-          initialValue: models[0].id,
           options: [
             ...models
               .filter((model) => model.brandId === brands[0].id)
@@ -98,7 +99,6 @@ class CarManager {
                 value: brand.id,
               })),
           ],
-          onChange: this.changeFormModel,
         },
       ],
     });
@@ -127,28 +127,16 @@ class CarManager {
     });
   };
 
-  private changeBrandFilter = ({ value: brandId }: { value: string }) => {
+  private changeBrandFilter = (brandId: string) => {
     const selectedBrand = brands.find((brand) => brand.id === brandId);
     this.setState({
-      selectedBrandId: selectedBrand?.id ?? null,
+      selectedBrandFilterId: selectedBrand?.id ?? null,
     });
   };
 
-  private changeFormBrand = ({ value: brandId, name }: { name: string, value: string }): void => {
-    console.warn('changeFormBrand is not implemented');
-    console.log({
-      selectedBrandId: this.state.selectedBrandId,
-      newBrandId: brandId,
-      name,
-    });
-  };
-
-  private changeFormModel = ({ value: modelId, name }: { name: string, value: string }): void => {
-    console.warn('changeFormModel is not implemented');
-    console.log({
-      selectedBrandId: this.state.selectedBrandId,
-      newModelId: modelId,
-      name,
+  private changeFormBrand = (brandId: string): void => {
+    this.setState({
+      selectedBrandFormId: brandId,
     });
   };
 
@@ -170,19 +158,23 @@ class CarManager {
   };
 
   private update = () => {
-    const { selectedBrandId, editedCarId } = this.state;
+    const { selectedBrandFilterId, editedCarId } = this.state;
 
-    const brandFound = brands.find((brand) => brand.id === selectedBrandId);
+    const brandFound = brands.find((brand) => brand.id === selectedBrandFilterId);
 
     const tableProps: Partial<TableProps<CarJoinedStringified>> = {
       title: brandFound ? `${brandFound.title} markės automobiliai` : 'Visi automobiliai',
       rowsData: (
-        selectedBrandId && brandFound
-          ? this.carsCollection.getByBrandId(selectedBrandId)
+        selectedBrandFilterId && brandFound
+          ? this.carsCollection.getByBrandId(selectedBrandFilterId)
           : this.carsCollection.all
       ).map(stringifyProps),
       editedRowId: editedCarId,
     };
+
+    const formProps: Partial<FormProps> = {};
+
+    this.form.updateProps(formProps);
 
     this.table.updateProps(tableProps);
   };

@@ -7,7 +7,7 @@ export type SelectFieldProps = {
   name?: string,
   labelText: string,
   initialValue?: string,
-  onChange?: (changeData: { name?: string, value: string }) => void,
+  onChange?: (newValue: string) => void,
   options: OptionType[],
 };
 
@@ -49,10 +49,7 @@ class SelectField {
     selectHtmlElement.id = `select-${SelectField.uniqId}`;
     if (name) selectHtmlElement.name = name;
     if (onChange) {
-      selectHtmlElement.addEventListener('change', () => onChange({
-        name: name ?? 'anonymous',
-        value: selectHtmlElement.value,
-      }));
+      selectHtmlElement.addEventListener('change', () => onChange(selectHtmlElement.value));
     }
 
     const optionsHtmlElements = this.createOptions();

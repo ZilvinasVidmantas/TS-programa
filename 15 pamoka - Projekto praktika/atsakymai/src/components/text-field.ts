@@ -2,7 +2,6 @@ export type TextFieldProps = {
   name: string,
   labelText: string,
   initialValue: string,
-  onChange?: (changeData: { name: string, value: string }) => void,
 };
 
 class TextField {
@@ -29,19 +28,13 @@ class TextField {
   }
 
   private initializeInput = () => {
-    const { name, initialValue, onChange } = this.props;
+    const { name, initialValue } = this.props;
 
     this.input.id = TextField.id;
     this.input.className = 'form-control';
     this.input.name = name;
     this.input.value = initialValue;
     this.input.type = 'text';
-    if (onChange) {
-      this.input.addEventListener('change', () => onChange({
-        name,
-        value: this.input.value,
-      }));
-    }
   };
 
   public initialize = (): void => {

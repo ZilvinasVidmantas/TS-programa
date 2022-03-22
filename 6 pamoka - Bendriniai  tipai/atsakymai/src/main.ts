@@ -44,9 +44,9 @@ console.group('3. Parašykite funkciją, kuri grąžina vienarūšių primityvi�
     return copy;
   }
 
-  console.log({ numbers, result: solution(numbers) });
-  console.log({ strings, result: solution(strings) });
-  console.log({ booleans, result: solution(booleans) });
+  console.log({ numbers, result: solution<number>(numbers) });
+  console.log({ strings, result: solution<string>(strings) });
+  console.log({ booleans, result: solution<boolean>(booleans) });
 }
 console.groupEnd();
 

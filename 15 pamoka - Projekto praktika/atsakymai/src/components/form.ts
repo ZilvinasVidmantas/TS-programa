@@ -5,7 +5,7 @@ type FieldProps = TextFieldProps | SelectFieldProps;
 
 type Field = TextField | SelectField;
 
-type FormProps = {
+export type FormProps = {
   title: string,
   submitText: string,
   fieldsProps: FieldProps[],
@@ -39,6 +39,13 @@ class Form {
     this.initialize();
   }
 
+  public updateProps = (newProps: Partial<FormProps>) => {
+    this.props = {
+      ...this.props,
+      ...newProps,
+    };
+  };
+
   private initialize = (): void => {
     const { title, submitText } = this.props;
 
@@ -53,6 +60,8 @@ class Form {
 
     fieldsContainer?.append(...this.fields.map((x) => x.htmlElement));
   };
+
+ 
 }
 
 export default Form;
