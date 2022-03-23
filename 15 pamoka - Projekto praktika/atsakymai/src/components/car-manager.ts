@@ -4,9 +4,9 @@ import models from '../data/models';
 import CarJoined from '../types/car-joined';
 import stringifyProps from '../helpers/stingify-object';
 import CarsCollection from '../helpers/cars-collection';
-import SelectField from './select-field';
 import Table, { TableProps } from './table';
-import Form, { FormProps } from './form';
+import CarFormManager from './form-manager';
+import SelectField from './select-field';
 
 type CarJoinedStringified = {
   [Key in keyof CarJoined]: string;
@@ -30,7 +30,7 @@ class CarManager {
 
   private table: Table<CarJoinedStringified>;
 
-  private form: Form;
+  private carFormManager: CarFormManager;
 
   public constructor() {
     this.htmlElement = document.createElement('div');
@@ -70,37 +70,9 @@ class CarManager {
       onEdit: this.editCar,
     });
 
-    this.form = new Form({
+    this.carFormManager = new CarFormManager({
       title: 'Pridėti automobilį',
       submitText: 'Pridėti',
-      fieldsProps: [
-        { name: 'brand', labelText: 'Markė', initialValue: '' },
-        { name: 'model', labelText: 'Modelis', initialValue: '' },
-        {
-          name: 'brand',
-          labelText: 'Markė',
-          initialValue: brands[0].id,
-          options: [
-            ...brands.map((brand) => ({
-              title: brand.title,
-              value: brand.id,
-            })),
-          ],
-          onChange: this.changeFormBrand,
-        },
-        {
-          name: 'model',
-          labelText: 'Modelis',
-          options: [
-            ...models
-              .filter((model) => model.brandId === brands[0].id)
-              .map((brand) => ({
-                title: brand.title,
-                value: brand.id,
-              })),
-          ],
-        },
-      ],
     });
 
     this.initialize();
@@ -134,12 +106,6 @@ class CarManager {
     });
   };
 
-  private changeFormBrand = (brandId: string): void => {
-    this.setState({
-      selectedBrandFormId: brandId,
-    });
-  };
-
   private initialize = () => {
     this.htmlElement.className = 'container my-4';
     this.htmlElement.innerHTML = '<h2 class="text-center">Automobilių tvarkyklė</h2>';
@@ -148,7 +114,7 @@ class CarManager {
     tableAndFormWrapper.className = 'd-flex gap-4 mt-4 align-items-start';
     tableAndFormWrapper.append(
       this.table.htmlElement,
-      this.form.htmlElement,
+      this.carFormManager.htmlElement,
     );
 
     this.htmlElement.append(
@@ -158,7 +124,10 @@ class CarManager {
   };
 
   private update = () => {
-    const { selectedBrandFilterId, editedCarId } = this.state;
+    const {
+      selectedBrandFilterId,
+      editedCarId,
+    } = this.state;
 
     const brandFound = brands.find((brand) => brand.id === selectedBrandFilterId);
 
@@ -171,10 +140,6 @@ class CarManager {
       ).map(stringifyProps),
       editedRowId: editedCarId,
     };
-
-    const formProps: Partial<FormProps> = {};
-
-    this.form.updateProps(formProps);
 
     this.table.updateProps(tableProps);
   };

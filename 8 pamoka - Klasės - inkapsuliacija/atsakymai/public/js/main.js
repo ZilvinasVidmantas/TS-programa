@@ -5,13 +5,18 @@ var HeightUnits;
     HeightUnits["METRES"] = "m";
     HeightUnits["INCHES"] = "in";
 })(HeightUnits || (HeightUnits = {}));
-;
+var WeightUnits;
+(function (WeightUnits) {
+    WeightUnits["KG"] = "kg";
+    WeightUnits["LBS"] = "lbs";
+})(WeightUnits || (WeightUnits = {}));
 class Person {
-    constructor({ name, surname, age, height, heightUnits }) {
+    constructor({ name, surname, age, height, heightUnits, weight, weightUnits, }) {
         this.name = name;
         this.surname = surname;
         this.setAge(age);
         this.setHeight(height, heightUnits);
+        this.setWeight(weight, weightUnits);
     }
     setName(name) {
         this.name = name;
@@ -44,23 +49,65 @@ class Person {
             default: this.height = height;
         }
     }
+    setWeight(weight, units) {
+        switch (units) {
+            case WeightUnits.KG:
+                this.weight = weight;
+                break;
+            case WeightUnits.LBS:
+                this.weight = weight / 2.20462262;
+                break;
+            default: this.weight = weight;
+        }
+    }
     getAge() {
         return this.age;
     }
     getHeight() {
         if (this.height === undefined)
-            return this.height;
+            return 0;
+        let value;
         switch (Person.heightUnits) {
-            case HeightUnits.CENTIMETRES: return this.height;
-            case HeightUnits.METRES: return this.height / 100;
-            case HeightUnits.INCHES: return this.height / 2.54;
+            case HeightUnits.CENTIMETRES:
+                value = this.height;
+                break;
+            case HeightUnits.METRES:
+                value = this.height / 100;
+                break;
+            case HeightUnits.INCHES:
+                value = this.height / 2.54;
+                break;
+            default: value = this.height;
         }
+        return Math.round(value * 100) / 100;
+    }
+    getWeight() {
+        if (this.weight === undefined)
+            return 0;
+        let value;
+        switch (Person.weightUnits) {
+            case WeightUnits.KG:
+                value = this.weight;
+                break;
+            case WeightUnits.LBS:
+                value = this.weight * 2.20462262;
+                break;
+            default: value = this.weight;
+        }
+        return Math.round(value * 10) / 10;
     }
     getFullname() {
-        return this.name + ' ' + this.surname;
+        return `${this.name} ${this.surname}`;
+    }
+    toString() {
+        let formattedPerson = `${this.name} ${this.surname}\n`;
+        formattedPerson += `\theight: ${this.getHeight()} ${Person.heightUnits}\n`;
+        formattedPerson += `\tweight: ${this.getWeight()}   ${Person.weightUnits}\n`;
+        return formattedPerson;
     }
 }
 Person.heightUnits = HeightUnits.CENTIMETRES;
+Person.weightUnits = WeightUnits.KG;
 console.group('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekvienai iš jų sukurkite setterius, ir bendrą getterį fullname');
 {
     const person = new Person({
@@ -68,6 +115,7 @@ console.group('1. Sukurkite Person klasei savybes "name" ir "surname". Kiekviena
         surname: 'Bordiūras',
         age: 20,
         height: 180,
+        weight: 80,
     });
     const newName = 'Bolvaris';
     const newSurname = 'Kepurė';
@@ -86,12 +134,14 @@ console.group('2. Sukurkite Person klasei savybę "age". Inkapsuliuokite šią s
         surname: 'Vampyrė',
         age: 2000,
         height: 180,
+        weight: 80,
     });
     const person = new Person({
         name: 'Serbentautas',
         surname: 'Bordiūras',
         age: 20,
         height: 180,
+        weight: 80,
     });
     console.log('Person with wrong age param:\n\t', personWrongAge);
     console.log('Person with correctly set age:\n\t', person);
@@ -121,12 +171,14 @@ console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų 
         surname: 'Bordiūras',
         age: 20,
         height: 180,
+        weight: 80,
     };
     const personProps2 = {
         name: 'Amerikas',
         surname: 'Magelanas',
         age: 20,
         height: 70,
+        weight: 80,
         heightUnits: HeightUnits.INCHES,
     };
     const personProps3 = {
@@ -134,6 +186,7 @@ console.group('3. Sukurkite Person klasei savybę "height" kurios vertė būtų 
         surname: 'Magelanas',
         age: 20,
         height: 1.75,
+        weight: 78,
         heightUnits: HeightUnits.METRES,
     };
     const person1 = new Person(personProps1);
@@ -162,15 +215,15 @@ console.log('');
 console.group('4. Sukurkite Person klasei statinę savybę "heightUnits". Jos tipas turi būti išvardinimas(enum), kurio pasirinkimai yra: "CM", "M", "IN". Numatytoji(default) "heightUnits" reikšmė turi būti centimetrai');
 {
     console.log('Person klasės statinės savybės:');
-    console.dir(Object.assign({}, Person));
+    console.dir({ ...Person });
     console.log('Keičiami matavimo vienetai į:', HeightUnits.INCHES);
     Person.heightUnits = HeightUnits.INCHES;
     console.log('Person klasės statinės savybės:');
-    console.dir(Object.assign({}, Person));
+    console.dir({ ...Person });
     console.log('Keičiami matavimo vienetai į:', HeightUnits.METRES);
     Person.heightUnits = HeightUnits.METRES;
     console.log('Person klasės statinės savybės:');
-    console.dir(Object.assign({}, Person));
+    console.dir({ ...Person });
 }
 console.groupEnd();
 console.log('');
@@ -182,6 +235,7 @@ console.group('6. "height" geteriui sukurkite logiką, jog jis grąžintų matav
         surname: 'Bordiūras',
         age: 20,
         height: 180,
+        weight: 80,
     });
     console.log('Sukurtas objektas:', person);
     console.log('\n--\n');
@@ -199,8 +253,49 @@ console.groupEnd();
 console.log('');
 console.group('7. Analogiškai pagal [4.]-[6.] punktus sukurkite savybę weight su statiniu išvardinimu "weightUnits", kurio pasirinkimai turi būti: "KG", "LBS"');
 {
+    const person = new Person({
+        name: 'Serbentautas',
+        surname: 'Bordiūras',
+        age: 20,
+        height: 180,
+        weight: 80,
+    });
+    console.log('Sukurtas objektas:', person);
+    console.log('\n--\n');
+    Person.weightUnits = WeightUnits.KG;
+    console.log('Person klasės svorio matavimo vienetai:', Person.weightUnits);
+    console.log('žmogaus ūgis', person.getWeight());
+    Person.weightUnits = WeightUnits.LBS;
+    console.log('Person klasės svorio matavimo vienetai:', Person.weightUnits);
+    console.log('žmogaus ūgis', person.getWeight());
 }
 console.groupEnd();
 console.log('');
 console.group('8. Sukurkite klasei Person metodą "toString". Kuris paverstų žmogaus savybes gražiu formatu: vardas ir pavardė pirmoje eilutėje, o "height" ir "weight" savybės atskirose eilutėse, atitrauktos nuo kairio krašto per "tab" simbolį, ir su matavimo vienetais(kurie išsaugoti) statinėse Person klasės savybėse');
+{
+    const person1 = new Person({
+        name: 'Severija',
+        surname: 'Vampyrė',
+        age: 80,
+        height: 166,
+        weight: 64,
+    });
+    const person2 = new Person({
+        name: 'Serbentautas',
+        surname: 'Bordiūras',
+        age: 20,
+        height: 180,
+        weight: 80,
+    });
+    Person.heightUnits = HeightUnits.METRES;
+    Person.weightUnits = WeightUnits.KG;
+    console.log('European Standard');
+    console.log(person1.toString());
+    console.log(person2.toString());
+    Person.heightUnits = HeightUnits.INCHES;
+    Person.weightUnits = WeightUnits.LBS;
+    console.log('American Standard');
+    console.log(person1.toString());
+    console.log(person2.toString());
+}
 //# sourceMappingURL=main.js.map

@@ -1,67 +1,66 @@
-import TextField, { TextFieldProps } from './text-field';
-import SelectField, { SelectFieldProps } from './select-field';
+import TextField from './text-field';
+import SelectField from './select-field';
 
-type FieldProps = TextFieldProps | SelectFieldProps;
-
-type Field = TextField | SelectField;
+export type Field = TextField | SelectField;
 
 export type FormProps = {
   title: string,
   submitText: string,
-  fieldsProps: FieldProps[],
+  fields?: Field[],
 };
-
-function isSelectFieldProps(fieldProps: FieldProps): fieldProps is SelectFieldProps {
-  return (fieldProps as SelectFieldProps).options !== undefined;
-}
 
 class Form {
   private props: FormProps;
 
-  private fields: Field[];
+  private fieldsContainer: HTMLDivElement;
 
-  // private header: HTMLHeadingElement;
+  private header: HTMLHeadingElement;
 
-  // private submitBtn: HTMLButtonElement;
+  private submitBtn: HTMLButtonElement;
 
   public htmlElement: HTMLFormElement;
 
   constructor(props: FormProps) {
     this.props = props;
     this.htmlElement = document.createElement('form');
-    this.fields = props.fieldsProps.map((fieldProps) => {
-      if (isSelectFieldProps(fieldProps)) {
-        return new SelectField(fieldProps);
-      }
-      return new TextField(fieldProps);
-    });
+    this.fieldsContainer = document.createElement('div');
+    this.header = document.createElement('h2');
+    this.submitBtn = document.createElement('button');
 
     this.initialize();
   }
 
-  public updateProps = (newProps: Partial<FormProps>) => {
-    this.props = {
-      ...this.props,
-      ...newProps,
-    };
+  protected renderFields = () => {
+    const { fields } = this.props;
+
+    if (fields === undefined) return;
+
+    this.fieldsContainer.append(...fields.map((x) => x.htmlElement));
   };
 
   private initialize = (): void => {
     const { title, submitText } = this.props;
 
+    this.header.className = 'h3';
+    this.header.innerHTML = title;
+
+    this.fieldsContainer.className = 'd-flex flex-column gap-2 mb-3';
+
+    this.submitBtn.type = 'submit';
+    this.submitBtn.className = 'btn btn-success mb-2';
+    this.submitBtn.innerText = submitText;
+
     this.htmlElement.className = 'card p-3';
     this.htmlElement.style.width = '400px';
-    this.htmlElement.innerHTML = `
-      <h2 class="h3">${title}</h2>
-      <div class="js-field-container d-flex flex-column gap-2 mb-3"></div>
-      <button type="submit" class="btn btn-success mb-2">${submitText}</button>`;
 
-    const fieldsContainer = this.htmlElement.querySelector('.js-field-container');
+    this.htmlElement.append(
+      this.header,
+      this.fieldsContainer,
+      this.submitBtn,
+    );
 
-    fieldsContainer?.append(...this.fields.map((x) => x.htmlElement));
+    this.renderFields();
   };
-
- 
 }
 
 export default Form;

@@ -77,11 +77,15 @@ class List<Type> {
     }
   }
 
+  private addFirstElement = (node: ListNode<Type>) => {
+    this.head = node;
+    this.tail = node;
+  }
+
   // 3.
   public addNodeStart = (node: ListNode<Type>): void => {
     if (this.head === null) {
-      this.head = node;
-      this.tail = node;
+      this.addFirstElement(node);
     } else {
       node.next = this.head;
       this.head = node;
@@ -91,8 +95,7 @@ class List<Type> {
   // 4.
   public addNodeEnd = (node: ListNode<Type>): void => {
     if (this.tail === null) {
-      this.head = node;
-      this.tail = node;
+      this.addFirstElement(node);
     } else {
       this.tail.next = node;
       this.tail = node;
