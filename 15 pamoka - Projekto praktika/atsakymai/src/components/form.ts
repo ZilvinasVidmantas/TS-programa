@@ -6,7 +6,8 @@ export type Field = TextField | SelectField;
 export type FormProps = {
   title: string,
   submitText: string,
-  fields?: Field[],
+  fields: Field[],
+  onSubmit: (fields: Field[]) => void;
 };
 
 class Form {
@@ -30,7 +31,7 @@ class Form {
     this.initialize();
   }
 
-  protected renderFields = () => {
+  private renderFields = () => {
     const { fields } = this.props;
 
     if (fields === undefined) return;
@@ -39,7 +40,7 @@ class Form {
   };
 
   private initialize = (): void => {
-    const { title, submitText } = this.props;
+    const { title, submitText, onSubmit } = this.props;
 
     this.header.className = 'h3';
     this.header.innerHTML = title;
@@ -52,12 +53,25 @@ class Form {
 
     this.htmlElement.className = 'card p-3';
     this.htmlElement.style.width = '400px';
+    this.htmlElement.addEventListener('submit', (e) => {
+      e.preventDefault();
+      onSubmit(this.props.fields);
+    });
 
     this.htmlElement.append(
       this.header,
       this.fieldsContainer,
       this.submitBtn,
     );
+
+    this.renderFields();
+  };
+
+  public updateProps = (newProps: Partial<FormProps>): void => {
+    this.props = {
+      ...this.props,
+      ...newProps,
+    };
 
     this.renderFields();
   };

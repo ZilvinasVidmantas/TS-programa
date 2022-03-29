@@ -37,7 +37,7 @@ class TextField {
     this.input.type = 'text';
   };
 
-  public initialize = (): void => {
+  private initialize = (): void => {
     const { labelText } = this.props;
 
     this.htmlElement.innerHTML = `<label for="${TextField.id}" class="form-label">${labelText}</label>`;
@@ -45,6 +45,8 @@ class TextField {
 
     this.htmlElement.append(this.input);
   };
+
+  public getValue = (): string => this.input.value;
 }
 
 export default TextField;

@@ -16,17 +16,24 @@ class SelectField {
 
   public htmlElement: HTMLDivElement;
 
+  private htmlSelectElement: HTMLSelectElement;
+
+  private htmlLabelElement: HTMLLabelElement;
+
   private props: SelectFieldProps;
 
   constructor(props: SelectFieldProps) {
     SelectField.uniqId += 1;
     this.htmlElement = document.createElement('div');
+    this.htmlSelectElement = document.createElement('select');
+    this.htmlLabelElement = document.createElement('label');
+
     this.props = props;
 
     this.initialize();
   }
 
-  private createOptions = (): HTMLOptionElement[] => {
+  private updateSelectOptions = (): void => {
     const { options, initialValue } = this.props;
 
     const optionsHtmlElements = options.map((option, i) => {
@@ -38,34 +45,51 @@ class SelectField {
       return element;
     });
 
-    return optionsHtmlElements;
-  };
-
-  private createSelectHtmlElement = (): HTMLSelectElement => {
-    const { name, onChange } = this.props;
-
-    const selectHtmlElement = document.createElement('select');
-    selectHtmlElement.className = 'form-select';
-    selectHtmlElement.id = `select-${SelectField.uniqId}`;
-    if (name) selectHtmlElement.name = name;
-    if (onChange) {
-      selectHtmlElement.addEventListener('change', () => onChange(selectHtmlElement.value));
-    }
-
-    const optionsHtmlElements = this.createOptions();
-    selectHtmlElement.append(...optionsHtmlElements);
-
-    return selectHtmlElement;
+    this.htmlSelectElement.innerHTML = '';
+    this.htmlSelectElement.append(...optionsHtmlElements);
   };
 
   private initialize = () => {
-    const { labelText } = this.props;
-    const selectHtmlElement = this.createSelectHtmlElement();
+    const elementId = `select-${SelectField.uniqId}`;
 
-    this.htmlElement.innerHTML = `<label for="select-${SelectField.uniqId}">${labelText}</label>`;
+    this.htmlLabelElement.setAttribute('for', elementId);
+
+    this.htmlSelectElement.className = 'form-select';
+    this.htmlSelectElement.id = elementId;
+
     this.htmlElement.className = 'form-group';
-    this.htmlElement.append(selectHtmlElement);
+    this.htmlElement.append(
+      this.htmlLabelElement,
+      this.htmlSelectElement,
+    );
+
+    this.updateView();
   };
+
+  private updateView = (): void => {
+    const { name, labelText, onChange } = this.props;
+
+    this.htmlLabelElement.innerHTML = labelText;
+
+    if (name) {
+      this.htmlSelectElement.name = name;
+    }
+    if (onChange) {
+      this.htmlSelectElement.addEventListener('change', () => onChange(this.htmlSelectElement.value));
+    }
+    this.updateSelectOptions();
+  };
+
+  public updateProps = (newProps: Partial<SelectFieldProps>) => {
+    this.props = {
+      ...this.props,
+      ...newProps,
+    };
+
+    this.updateView();
+  };
+
+  public getValue = (): string => this.htmlSelectElement.value;
 }
 
 export default SelectField;

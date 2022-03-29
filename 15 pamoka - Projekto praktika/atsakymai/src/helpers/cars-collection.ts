@@ -61,6 +61,10 @@ class CarsCollection {
   public deleteCarById = (carId: string): void => {
     this.props.cars = this.props.cars.filter((car) => car.id !== carId);
   };
+
+  public createCar = () => {
+    
+  }
 }
 
 export default CarsCollection;

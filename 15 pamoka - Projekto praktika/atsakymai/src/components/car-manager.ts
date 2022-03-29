@@ -5,7 +5,7 @@ import CarJoined from '../types/car-joined';
 import stringifyProps from '../helpers/stingify-object';
 import CarsCollection from '../helpers/cars-collection';
 import Table, { TableProps } from './table';
-import CarFormManager from './form-manager';
+import CarFormManager, { CarFormManagerProps } from './car-form-manager';
 import SelectField from './select-field';
 
 type CarJoinedStringified = {
@@ -73,6 +73,7 @@ class CarManager {
     this.carFormManager = new CarFormManager({
       title: 'Pridėti automobilį',
       submitText: 'Pridėti',
+      onSubmit: this.handleSubmit,
     });
 
     this.initialize();
@@ -84,19 +85,37 @@ class CarManager {
       ...partialNewState,
     };
 
-    this.update();
+    this.updateChildrenProps();
   };
 
   private deleteCar = (id: string) => {
     this.carsCollection.deleteCarById(id);
 
-    this.update();
+    this.updateChildrenProps();
   };
 
   private editCar = (id: string) => {
     this.setState({
       editedCarId: id === this.state.editedCarId ? null : id,
     });
+  };
+
+  private createCar: CarFormManagerProps['onSubmit'] = (values) => {
+    console.log(values);
+  };
+
+  // eslint-disable-next-line class-methods-use-this
+  private updateCar: CarFormManagerProps['onSubmit'] = (values) => {
+
+  };
+
+  private handleSubmit: CarFormManagerProps['onSubmit'] = (values) => {
+    const {
+      state: { editedCarId },
+    } = this;
+
+    if (editedCarId === null) this.createCar(values);
+    else this.updateCar(values);
   };
 
   private changeBrandFilter = (brandId: string) => {
@@ -123,7 +142,7 @@ class CarManager {
     );
   };
 
-  private update = () => {
+  private updateChildrenProps = () => {
     const {
       selectedBrandFilterId,
       editedCarId,
