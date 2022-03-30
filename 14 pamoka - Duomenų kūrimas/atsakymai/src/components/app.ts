@@ -1,9 +1,9 @@
-import Table from "./table";
-import cars from "../data/cars";
-import brands from "../data/brands";
-import models from "../data/models";
+import Table from './table';
+import cars from '../data/cars';
+import brands from '../data/brands';
+import models from '../data/models';
 import CarsCollection from '../helpers/cars-collection';
-import stringifyProps, { StringifyObjectProps } from "../helpers/stingify-props";
+import stringifyProps, { StringifyObjectProps } from '../helpers/stingify-props';
 import CarJoined from '../types/car-joined';
 import SelectField from './select-field';
 
@@ -12,7 +12,7 @@ class App {
 
   private selectedBrandId: null | string;
 
-  private brandSelect: SelectField
+  private brandSelect: SelectField;
 
   private carTable: Table<StringifyObjectProps<CarJoined>>;
 
@@ -37,8 +37,11 @@ class App {
     });
     this.brandSelect = new SelectField({
       labelText: 'Markė',
-      options: brands.map(({ id, title }) => ({ title, value: id })),
-      onChange: this.handleBrandChange
+      options: [
+        { title: 'Visi automobiliai', value: '-1' },
+        ...brands.map(({ id, title }) => ({ title, value: id })),
+      ],
+      onChange: this.handleBrandChange,
     });
     this.selectedBrandId = null;
 
@@ -49,26 +52,28 @@ class App {
 
   public initialize = (): void => {
     const container = document.createElement('div');
-    container.className = 'container my-4 d-flex  flex-column gap-3';
+    container.className = 'container my-4 d-flex flex-column gap-3';
     container.append(
       this.brandSelect.htmlElement,
-      this.carTable.htmlElement
+      this.carTable.htmlElement,
     );
 
     this.htmlElement.append(container);
   };
 
   private handleBrandChange = (brandId: string) => {
-    this.selectedBrandId = brandId;
+    const brand = brands.find((b) => b.id === brandId);
+
+    this.selectedBrandId = brand ? brandId : null;
 
     this.update();
-  }
+  };
 
   private handleCarDelete = (carId: string) => {
     this.carsCollection.deleteCarById(carId);
 
     this.update();
-  }
+  };
 
   private update = () => {
     const { selectedBrandId, carsCollection } = this;
@@ -79,7 +84,7 @@ class App {
         rowsData: carsCollection.all.map(stringifyProps),
       });
     } else {
-      const brand = brands.find(b => b.id === selectedBrandId);
+      const brand = brands.find((b) => b.id === selectedBrandId);
       if (brand === undefined) throw new Error('Pasirinkta neegzistuojanti markė');
 
       this.carTable.updateProps({
@@ -87,7 +92,7 @@ class App {
         rowsData: carsCollection.getByBrandId(selectedBrandId).map(stringifyProps),
       });
     }
-  }
+  };
 }
 
 export default App;
