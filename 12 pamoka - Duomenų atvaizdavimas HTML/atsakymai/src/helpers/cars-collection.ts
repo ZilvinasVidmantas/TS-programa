@@ -23,8 +23,8 @@ class CarsCollection {
 
     return {
       ...car,
-      brand: (carBrand && carBrand?.title) ?? 'unknown',
-      model: (carModel && carModel?.title) ?? 'unknown',
+      brand: (carBrand && carBrand.title) ?? 'unknown',
+      model: (carModel && carModel.title) ?? 'unknown',
     };
   };
 
