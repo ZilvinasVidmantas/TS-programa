@@ -13,7 +13,6 @@ export type TableProps<Type> = {
 };
 
 class Table<Type extends RowData> {
-
   private props: TableProps<Type>;
 
   private tbody: HTMLTableSectionElement;
@@ -101,7 +100,7 @@ class Table<Type extends RowData> {
     this.tbody.append(...rowsHtmlElements);
   };
 
-  private addActionsCell = (rowHtmlElement: HTMLTableRowElement, id: string) => {
+  private addActionsCell = (tr: HTMLTableRowElement, id: string) => {
     const { onDelete } = this.props;
 
     const buttonCell = document.createElement('td');
@@ -110,21 +109,21 @@ class Table<Type extends RowData> {
     deleteButton.type = 'button';
     deleteButton.innerHTML = 'Delete';
     deleteButton.className = 'btn btn-danger';
-    deleteButton.addEventListener('click', () => onDelete(id));
     deleteButton.style.width = '80px';
+    deleteButton.addEventListener('click', () => onDelete(id));
 
     buttonCell.append(deleteButton);
-    rowHtmlElement.append(buttonCell);
+    tr.append(buttonCell);
   };
 
   public updateProps = (newProps: Partial<TableProps<Type>>) => {
     this.props = {
       ...this.props,
-      ...newProps
+      ...newProps,
     };
 
     this.renderView();
-  }
+  };
 }
 
 export default Table;
