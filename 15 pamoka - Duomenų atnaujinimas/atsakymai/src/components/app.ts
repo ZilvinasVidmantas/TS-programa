@@ -115,15 +115,19 @@ class App {
   private handleUpdateCar = ({
     brand, model, price, year,
   }: Values): void => {
-    const carProps: CarProps = {
-      brandId: brand,
-      modelId: model,
-      price: Number(price),
-      year: Number(year),
-    };
+    if (this.editedCarId) {
+      const carProps: CarProps = {
+        brandId: brand,
+        modelId: model,
+        price: Number(price),
+        year: Number(year),
+      };
 
-    console.log(carProps);
-    this.renderView();
+      this.carsCollection.update(this.editedCarId, carProps);
+      this.editedCarId = null;
+
+      this.renderView();
+    }
   };
 
   private renderView = () => {
