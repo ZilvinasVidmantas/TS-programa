@@ -52,7 +52,7 @@ class TextField {
 
     this.htmlLabelElement.innerHTML = labelText;
     this.htmlInputElement.name = name;
-    if (value) {
+    if (value !== undefined) {
       this.htmlInputElement.value = value;
     }
   };
